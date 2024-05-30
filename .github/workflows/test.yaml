@@ -10,15 +10,17 @@ permissions:
   contents: read
 
 jobs:
-  kind:
+  charts:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.6
       - name: Setup Helm
         uses: azure/setup-helm@v4.2.0
-      - name: Run lint
-        run: make lint
+      - name: Setup Helm Docs
+        uses: gabe565/setup-helm-docs-action@v1
+      - run: make helmdocs
+      - run: make lint
       - name: Check if working tree is dirty
         run: |
           if [[ $(git diff --stat) != '' ]]; then
