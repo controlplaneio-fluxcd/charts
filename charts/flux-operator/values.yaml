@@ -1,0 +1,55 @@
+# Default values for flux-operator.
+
+nameOverride: ""
+fullnameOverride: ""
+
+# -- Install and upgrade the Flux Operator CRDs.
+installCRDs: true
+
+# -- Common annotations to add to all deployed objects.
+commonAnnotations: {}
+
+# -- Common labels to add to all deployed objects.
+commonLabels: {}
+
+# -- Container image settings.
+# The image tag defaults to the chart appVersion.
+image:
+  repository: ghcr.io/controlplaneio-fluxcd/flux-operator
+  tag: ""
+  pullSecrets: [ ]
+
+# -- Pod Security Context settings.
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- Container Security Context settings.
+securityContext:
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - "ALL"
+
+# -- Container resources requests and limits settings.
+resources:
+   limits:
+     cpu: 1000m
+     memory: 1Gi
+   requests:
+     cpu: 100m
+     memory: 64Mi
+
+# -- Pod affinity and anti-affinity settings.
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/os
+              operator: In
+              values:
+                - linux
+
+# -- Pod tolerations settings.
+tolerations: []

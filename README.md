@@ -1,2 +1,7 @@
-# charts
-ControlPlane Helm Charts
+# ControlPlane Helm Charts
+
+This repository contains the Helm charts for the ControlPlane Flux CD projects.
+
+## Charts
+
+- [flux-operator](charts/flux-operator/README.md)

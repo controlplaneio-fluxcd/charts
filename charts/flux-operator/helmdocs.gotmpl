@@ -1,0 +1,24 @@
+{{ template "chart.header" . }}
+{{ template "chart.badgesSection" . }}
+
+{{ template "chart.description" . }}
+
+## Prerequisites
+
+- Kubernetes 1.22+
+- Helm 3.8.0+
+
+## Installing the Chart
+
+To install the chart with the release name `flux-operator`:
+
+```console
+helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
+  --namespace flux-system \
+  --create-namespace \
+  --wait
+```
+
+{{ template "chart.valuesSection" . }}
+
+{{ template "chart.sourcesSection" . }}
