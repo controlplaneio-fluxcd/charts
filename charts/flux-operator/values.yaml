@@ -3,7 +3,7 @@
 nameOverride: ""
 fullnameOverride: ""
 
-# -- Install and upgrade the Flux Operator CRDs.
+# -- Install and upgrade the custom resource definitions.
 installCRDs: true
 
 # -- Common annotations to add to all deployed objects.
@@ -19,11 +19,15 @@ image:
   tag: ""
   pullSecrets: [ ]
 
-# -- Pod Security Context settings.
-podSecurityContext: {}
-  # fsGroup: 2000
+# -- Pod priority class name.
+# Recommended value is system-cluster-critical.
+priorityClassName: ""
 
-# -- Container Security Context settings.
+# -- Pod security context settings.
+podSecurityContext: {}
+  # fsGroup: 1337
+
+# -- Container security context settings.
 securityContext:
   readOnlyRootFilesystem: true
   allowPrivilegeEscalation: false
@@ -39,6 +43,28 @@ resources:
    requests:
      cpu: 100m
      memory: 64Mi
+
+# -- Container liveness probe settings.
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8081
+  initialDelaySeconds: 15
+  periodSeconds: 20
+
+# -- Container readiness probe settings.
+readinessProbe:
+  httpGet:
+    path: /readyz
+    port: 8081
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+# -- Pod service account settings.
+# The name of the service account defaults to the release name.
+serviceAccount:
+  automount: true
+  name: ""
 
 # -- Pod affinity and anti-affinity settings.
 affinity:
