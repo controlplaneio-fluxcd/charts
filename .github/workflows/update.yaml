@@ -1,0 +1,40 @@
+name: update
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.6
+      - name: Setup yq
+        uses: fluxcd/pkg/actions/yq@main
+      - name: Setup kubectl
+        uses: fluxcd/pkg/actions/kubectl@main
+      - name: Setup kubeconform
+        uses: fluxcd/pkg/actions/kubeconform@main
+      - name: Setup Helm
+        uses: azure/setup-helm@v4.2.0
+      - name: Setup Helm Docs
+        uses: gabe565/setup-helm-docs-action@v1
+      - run: make plugins update manifests lint
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6.0.5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            Update charts
+          committer: GitHub <noreply@github.com>
+          signoff: true
+          branch: update-charts
+          title: Update charts
+          body: |
+            Update charts
