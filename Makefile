@@ -4,10 +4,10 @@ SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
 
 .PHONY: all
-all: update manifests lint package ## Run all targets.
+all: manifests lint ## Run all targets.
 
-.PHONY: update
-update: ## Update the CustomResourceDefinitions and App version for all charts.
+.PHONY: generate
+generate: ## Update the CustomResourceDefinitions and App version for all charts.
 	./scripts/flux-operator.sh
 
 .PHONY: manifests

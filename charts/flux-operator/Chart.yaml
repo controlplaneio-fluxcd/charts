@@ -1,12 +1,11 @@
 apiVersion: v2
 version: 0.1.0
 appVersion: "v0.1.0"
+kubeVersion: ">=1.22.0-0"
 type: application
 name: flux-operator
 description: |
-  A Helm chart for installing the Flux Operator.
-  The operator provides a declarative API for the installation and upgrade of the Flux distribution
-  and automates the patching for hotfixes and CVEs affecting the Flux controllers container images.
+  A Helm chart for deploying the Flux Operator.
 home: https://github.com/controlplaneio-fluxcd
 icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/flux/icon/color/flux-icon-color.png
 sources:
@@ -21,7 +20,9 @@ annotations:
       url: https://github.com/controlplaneio-fluxcd/flux-operator
 maintainers:
   - name: Stefan Prodan
-    email: stefan.prodan@control-plane.io
+    url: https://stefanprodan.com
+  - name: ControlPlane
+    url: https://control-plane.io
 keywords:
   - fluxcd
   - gitops

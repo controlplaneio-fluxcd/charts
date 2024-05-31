@@ -50,3 +50,9 @@ app.kubernetes.io/name: {{ include "flux-operator.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "flux-operator.serviceAccountName" -}}
+{{- default (include "flux-operator.fullname" .) .Values.serviceAccount.name }}
+{{- end }}

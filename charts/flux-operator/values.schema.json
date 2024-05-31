@@ -75,11 +75,58 @@
         "installCRDs": {
             "type": "boolean"
         },
+        "livenessProbe": {
+            "properties": {
+                "httpGet": {
+                    "properties": {
+                        "path": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "initialDelaySeconds": {
+                    "type": "integer"
+                },
+                "periodSeconds": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "nameOverride": {
             "type": "string"
         },
         "podSecurityContext": {
             "properties": {},
+            "type": "object"
+        },
+        "priorityClassName": {
+            "type": "string"
+        },
+        "readinessProbe": {
+            "properties": {
+                "httpGet": {
+                    "properties": {
+                        "path": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "initialDelaySeconds": {
+                    "type": "integer"
+                },
+                "periodSeconds": {
+                    "type": "integer"
+                }
+            },
             "type": "object"
         },
         "resources": {
@@ -127,6 +174,17 @@
                 },
                 "readOnlyRootFilesystem": {
                     "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "serviceAccount": {
+            "properties": {
+                "automount": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
                 }
             },
             "type": "object"

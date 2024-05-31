@@ -1,16 +1,21 @@
 {{ template "chart.header" . }}
 {{ template "chart.badgesSection" . }}
 
-{{ template "chart.description" . }}
+The [Flux Operator](https://github.com/controlplaneio-fluxcd) provides a declarative API
+for the installation and upgrade of CNCF [Flux](https://fluxcd.io) and the
+ControlPlane [enterprise distribution](https://control-plane.io/enterprise-for-flux-cd/).
+
+The operator automates the patching for hotfixes and CVEs affecting the Flux controllers container images
+and enables the configuration of multi-tenancy lockdown on Kubernetes and OpenShift clusters.
 
 ## Prerequisites
 
 - Kubernetes 1.22+
-- Helm 3.8.0+
+- Helm 3.8+
 
 ## Installing the Chart
 
-To install the chart with the release name `flux-operator`:
+To install the operator in the `flux-system` namespace:
 
 ```console
 helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
@@ -18,6 +23,9 @@ helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-opera
   --create-namespace \
   --wait
 ```
+
+To deploy the Flux controllers and to configure automated updates,
+see the Flux Operator [documentation](https://github.com/controlplaneio-fluxcd/flux-operator).
 
 {{ template "chart.valuesSection" . }}
 
