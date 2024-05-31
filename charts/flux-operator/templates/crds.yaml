@@ -31,6 +31,9 @@ spec:
     - jsonPath: .status.conditions[?(@.type=="Ready")].message
       name: Status
       type: string
+    - jsonPath: .status.lastAttemptedRevision
+      name: Revision
+      type: string
     name: v1
     schema:
       openAPIV3Schema:
@@ -188,6 +191,21 @@ spec:
                       - patch
                       type: object
                     type: array
+                type: object
+              storage:
+                description: |-
+                  Storage holds the specification of the source-controller
+                  persistent volume claim.
+                properties:
+                  class:
+                    description: Class is the storage class to use for the PVC.
+                    type: string
+                  size:
+                    description: Size is the size of the PVC.
+                    type: string
+                required:
+                - class
+                - size
                 type: object
               wait:
                 default: true
