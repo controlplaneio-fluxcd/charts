@@ -4,19 +4,19 @@ SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
 
 .PHONY: all
-all: update helmdocs lint package ## Run all targets.
+all: update manifests lint package ## Run all targets.
 
 .PHONY: update
 update: ## Update the CustomResourceDefinitions and App version for all charts.
 	./scripts/flux-operator.sh
 
-.PHONY: helmdocs
-helmdocs: ## Generate Helm documentation for all charts.
-	helm-docs --chart-search-root=charts --template-files=helmdocs.gotmpl
+.PHONY: manifests
+manifests: ## Generate schema and docs for all charts.
+	./scripts/manifests.sh
 
 .PHONY: lint
 lint:  ## Run Helm linter against all charts.
-	helm lint ./charts/*
+	./scripts/lint.sh
 
 .PHONY: package
 package: ## Package all Helm charts into the dist directory.
@@ -26,6 +26,10 @@ package: ## Package all Helm charts into the dist directory.
 .PHONY: push
 push: ## Push all Helm charts to the Helm repository.
 	./scripts/push.sh
+
+.PHONY: plugins
+plugins: ## Install required Helm plugins.
+	helm plugin install https://github.com/losisin/helm-values-schema-json.git
 
 .PHONY: help
 help: ## Display this help.
