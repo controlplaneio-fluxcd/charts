@@ -15,7 +15,7 @@ commonLabels: {}
 # -- Container image settings.
 # The image tag defaults to the chart appVersion.
 image:
-  repository: ghcr.io/controlplaneio-fluxcd/flux-operator
+  repository: ghcr.io/controlplaneio-fluxcd/flux-operator # @schema required: true
   tag: ""
   pullSecrets: [ ]
 
