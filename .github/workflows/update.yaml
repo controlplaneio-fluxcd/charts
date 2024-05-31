@@ -25,7 +25,7 @@ jobs:
         uses: azure/setup-helm@v4.2.0
       - name: Setup Helm Docs
         uses: gabe565/setup-helm-docs-action@v1
-      - run: make plugins update manifests lint
+      - run: make plugins generate manifests lint
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6.0.5
         with:
