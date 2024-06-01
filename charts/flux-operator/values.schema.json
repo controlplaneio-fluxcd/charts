@@ -2,6 +2,25 @@
     "$schema": "https://json-schema.org/draft/2019-09/schema",
     "properties": {
         "affinity": {
+            "default": {
+                "nodeAffinity": {
+                    "requiredDuringSchedulingIgnoredDuringExecution": {
+                        "nodeSelectorTerms": [
+                            {
+                                "matchExpressions": [
+                                    {
+                                        "key": "kubernetes.io/os",
+                                        "operator": "In",
+                                        "values": [
+                                            "linux"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
             "properties": {
                 "nodeAffinity": {
                     "properties": {
@@ -58,7 +77,11 @@
         "image": {
             "properties": {
                 "pullSecrets": {
-                    "type": "array"
+                    "items": {
+                        "type": "object"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
                 },
                 "repository": {
                     "type": "string"
@@ -73,9 +96,18 @@
             "type": "object"
         },
         "installCRDs": {
+            "default": true,
             "type": "boolean"
         },
         "livenessProbe": {
+            "default": {
+                "httpGet": {
+                    "path": "/healthz",
+                    "port": 8081
+                },
+                "initialDelaySeconds": 15,
+                "periodSeconds": 20
+            },
             "properties": {
                 "httpGet": {
                     "properties": {
@@ -101,13 +133,25 @@
             "type": "string"
         },
         "podSecurityContext": {
+            "default": {
+                "fsGroup": 1337
+            },
             "properties": {},
             "type": "object"
         },
         "priorityClassName": {
+            "default": "system-cluster-critical",
             "type": "string"
         },
         "readinessProbe": {
+            "default": {
+                "httpGet": {
+                    "path": "/readyz",
+                    "port": 8081
+                },
+                "initialDelaySeconds": 5,
+                "periodSeconds": 10
+            },
             "properties": {
                 "httpGet": {
                     "properties": {
@@ -143,6 +187,10 @@
                     "type": "object"
                 },
                 "requests": {
+                    "default": {
+                        "cpu": "100m",
+                        "memory": "64Mi"
+                    },
                     "properties": {
                         "cpu": {
                             "type": "string"
@@ -159,26 +207,54 @@
         "securityContext": {
             "properties": {
                 "allowPrivilegeEscalation": {
+                    "default": false,
                     "type": "boolean"
                 },
                 "capabilities": {
+                    "default": {
+                        "drop": [
+                            "ALL"
+                        ]
+                    },
                     "properties": {
                         "drop": {
                             "items": {
                                 "type": "string"
                             },
-                            "type": "array"
+                            "type": "array",
+                            "uniqueItems": true
                         }
                     },
                     "type": "object"
                 },
                 "readOnlyRootFilesystem": {
+                    "default": true,
                     "type": "boolean"
+                },
+                "runAsNonRoot": {
+                    "default": true,
+                    "type": "boolean"
+                },
+                "seccompProfile": {
+                    "default": {
+                        "type": "RuntimeDefault"
+                    },
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 }
             },
             "type": "object"
         },
         "serviceAccount": {
+            "default": {
+                "automount": true,
+                "create": true,
+                "name": ""
+            },
             "properties": {
                 "automount": {
                     "type": "boolean"
@@ -190,8 +266,16 @@
             "type": "object"
         },
         "tolerations": {
-            "type": "array"
+            "items": {
+                "type": "object"
+            },
+            "type": "array",
+            "uniqueItems": true
         }
     },
+    "required": [
+        "resources",
+        "securityContext"
+    ],
     "type": "object"
 }
