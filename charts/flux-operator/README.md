@@ -33,8 +33,8 @@ see the Flux Operator [documentation](https://github.com/controlplaneio-fluxcd/f
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"kubernetes.io/os","operator":"In","values":["linux"]}]}]}}}` | Pod affinity and anti-affinity settings. |
-| commonAnnotations | object | `{}` | Common annotations to add to all deployed objects. |
-| commonLabels | object | `{}` | Common labels to add to all deployed objects. |
+| commonAnnotations | object | `{}` | Common annotations to add to all deployed objects including pods. |
+| commonLabels | object | `{}` | Common labels to add to all deployed objects including pods. |
 | fullnameOverride | string | `""` |  |
 | image | object | `{"pullSecrets":[],"repository":"ghcr.io/controlplaneio-fluxcd/flux-operator","tag":""}` | Container image settings. The image tag defaults to the chart appVersion. |
 | installCRDs | bool | `true` | Install and upgrade the custom resource definitions. |
@@ -44,7 +44,7 @@ see the Flux Operator [documentation](https://github.com/controlplaneio-fluxcd/f
 | priorityClassName | string | `""` | Pod priority class name. Recommended value is system-cluster-critical. |
 | readinessProbe | object | `{"httpGet":{"path":"/readyz","port":8081},"initialDelaySeconds":5,"periodSeconds":10}` | Container readiness probe settings. |
 | resources | object | `{"limits":{"cpu":"1000m","memory":"1Gi"},"requests":{"cpu":"100m","memory":"64Mi"}}` | Container resources requests and limits settings. |
-| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}` | Container security context settings. |
+| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | Container security context settings. The default is compliant with the pod security restricted profile. |
 | serviceAccount | object | `{"automount":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | tolerations | list | `[]` | Pod tolerations settings. |
 
