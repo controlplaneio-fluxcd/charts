@@ -47,6 +47,14 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            {{- with .Values.marketplace.account }}
+            - name: MARKETPLACE_ACCOUNT
+              value: {{ . }}
+            {{- end }}
+            {{- with .Values.marketplace.license }}
+            - name: MARKETPLACE_LICENSE
+              value: {{ . }}
+            {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

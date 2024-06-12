@@ -14,15 +14,18 @@ sources:
 annotations:
   "artifacthub.io/license": AGPL-3.0
   "artifacthub.io/links": |
+    - name: Documentation
+      url: https://fluxcd.control-plane.io/operator
     - name: Chart Source
       url: https://github.com/controlplaneio-fluxcd/charts
     - name: Upstream Project
       url: https://github.com/controlplaneio-fluxcd/flux-operator
 maintainers:
   - name: Stefan Prodan
-    url: https://stefanprodan.com
-  - name: ControlPlane
-    url: https://control-plane.io
+    email: stefan.prodan@control-plane.io
+  - name: Soule Ba
+    url: soule.ba@control-plane.io
 keywords:
+  - flux
   - fluxcd
   - gitops

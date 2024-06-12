@@ -129,6 +129,17 @@
             },
             "type": "object"
         },
+        "marketplace": {
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "license": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "nameOverride": {
             "type": "string"
         },
