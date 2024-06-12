@@ -82,3 +82,8 @@ affinity: # @schema default: {"nodeAffinity":{"requiredDuringSchedulingIgnoredDu
 
 # -- Pod tolerations settings.
 tolerations: [ ] # @schema item: object ; uniqueItems: true
+
+# -- Marketplace settings.
+marketplace:
+  license: ""
+  account: ""
