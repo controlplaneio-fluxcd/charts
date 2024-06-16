@@ -71,8 +71,19 @@
             "properties": {},
             "type": "object"
         },
+        "extraEnvs": {
+            "items": {
+                "type": "object"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "fullnameOverride": {
             "type": "string"
+        },
+        "hostNetwork": {
+            "default": false,
+            "type": "boolean"
         },
         "image": {
             "properties": {

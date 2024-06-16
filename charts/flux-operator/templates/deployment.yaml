@@ -40,6 +40,9 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.hostNetwork }}
+      hostNetwork: true
+      {{- end }}
       containers:
         - name: manager
           env:
@@ -54,6 +57,9 @@ spec:
             {{- with .Values.marketplace.license }}
             - name: MARKETPLACE_LICENSE
               value: {{ . }}
+            {{- end }}
+            {{- if .Values.extraEnvs }}
+              {{- toYaml .Values.extraEnvs | nindent 12 }}
             {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}

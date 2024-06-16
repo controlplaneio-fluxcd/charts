@@ -87,3 +87,9 @@ tolerations: [ ] # @schema item: object ; uniqueItems: true
 marketplace:
   license: ""
   account: ""
+
+# -- If `true`, the container ports (`8080` and `8081`) are exposed on the host network.
+hostNetwork: false # @schema default: false
+
+# -- Container extra environment variables.
+extraEnvs: [ ] # @schema item: object ; uniqueItems: true
