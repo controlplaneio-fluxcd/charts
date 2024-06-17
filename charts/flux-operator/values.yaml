@@ -85,6 +85,7 @@ tolerations: [ ] # @schema item: object ; uniqueItems: true
 
 # -- Marketplace settings.
 marketplace:
+  type: ""
   license: ""
   account: ""
 

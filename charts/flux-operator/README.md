@@ -41,7 +41,7 @@ see the Flux Operator [documentation](https://fluxcd.control-plane.io/operator/)
 | image | object | `{"pullSecrets":[],"repository":"ghcr.io/controlplaneio-fluxcd/flux-operator","tag":""}` | Container image settings. The image tag defaults to the chart appVersion. |
 | installCRDs | bool | `true` | Install and upgrade the custom resource definitions. |
 | livenessProbe | object | `{"httpGet":{"path":"/healthz","port":8081},"initialDelaySeconds":15,"periodSeconds":20}` | Container liveness probe settings. |
-| marketplace | object | `{"account":"","license":""}` | Marketplace settings. |
+| marketplace | object | `{"account":"","license":"","type":""}` | Marketplace settings. |
 | nameOverride | string | `""` |  |
 | podSecurityContext | object | `{}` | Pod security context settings. |
 | priorityClassName | string | `""` | Pod priority class name. Recommended value is system-cluster-critical. |
