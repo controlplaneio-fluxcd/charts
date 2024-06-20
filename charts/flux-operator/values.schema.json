@@ -284,6 +284,9 @@
                 "automount": {
                     "type": "boolean"
                 },
+                "create": {
+                    "type": "boolean"
+                },
                 "name": {
                     "type": "string"
                 }

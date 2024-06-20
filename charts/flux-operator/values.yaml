@@ -51,6 +51,7 @@ readinessProbe: # @schema default: {"httpGet":{"path":"/readyz","port":8081},"in
 # -- Pod service account settings.
 # The name of the service account defaults to the release name.
 serviceAccount: # @schema default: {"create":true,"automount":true,"name":""}
+  create: true
   automount: true
   name: ""
 

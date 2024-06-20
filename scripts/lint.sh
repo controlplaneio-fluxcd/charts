@@ -19,6 +19,7 @@ for pkg in ${REPOSITORY_ROOT}/charts/*; do
   if [ -z "${pkg:-}" ]; then
     break
   fi
-  info "Running helm template and kubeconform for ${pkg}"
-  helm template --include-crds ${pkg} | kubeconform -strict -ignore-missing-schemas -verbose
+  chartName=${pkg##*/}
+  info "Running helm template and kubeconform for ${chartName}"
+  helm template ${chartName} --include-crds ${pkg} | kubeconform -strict -ignore-missing-schemas -verbose
 done
