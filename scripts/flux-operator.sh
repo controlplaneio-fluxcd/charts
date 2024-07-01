@@ -7,6 +7,7 @@ set -euo pipefail
 
 REPOSITORY_ROOT=$(git rev-parse --show-toplevel)
 CHART_DIR="${REPOSITORY_ROOT}/charts/flux-operator"
+INSTANCE_CHART_DIR="${REPOSITORY_ROOT}/charts/flux-instance"
 CRD_URL="https://github.com/controlplaneio-fluxcd/flux-operator/config/crd"
 VERSION=$(gh release view --repo controlplaneio-fluxcd/flux-operator --json tagName -q '.tagName')
 
@@ -76,7 +77,9 @@ info "CRDs generated for Flux Operator ${VERSION}"
 # Patch app version
 export APP_VERSION=${VERSION}
 yq eval '.appVersion=env(APP_VERSION)' -i "${CHART_DIR}/Chart.yaml"
+yq eval '.appVersion=env(APP_VERSION)' -i "${INSTANCE_CHART_DIR}/Chart.yaml"
 export CHART_VERSION=${VERSION#v}
 yq eval '.version=env(CHART_VERSION)' -i "${CHART_DIR}/Chart.yaml"
+yq eval '.version=env(CHART_VERSION)' -i "${INSTANCE_CHART_DIR}/Chart.yaml"
 
 info "Chart.yaml updated to version ${CHART_VERSION}"
