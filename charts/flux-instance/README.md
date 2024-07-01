@@ -3,7 +3,7 @@
 ![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.0.1](https://img.shields.io/badge/AppVersion-v0.0.1-informational?style=flat-square)
 
 This chart is a thin wrapper around the `FluxInstance` custom resource, which is
-used by the [Flux Operator](https://github.com/controlplaneio-fluxcd)
+used by the [Flux Operator](https://github.com/controlplaneio-fluxcd/flux-operator)
 to install, configure and automatically upgrade Flux.
 
 ## Prerequisites
