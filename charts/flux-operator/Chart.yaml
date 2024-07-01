@@ -21,10 +21,8 @@ annotations:
     - name: Upstream Project
       url: https://github.com/controlplaneio-fluxcd/flux-operator
 maintainers:
-  - name: Stefan Prodan
-    email: stefan.prodan@control-plane.io
-  - name: Soule Ba
-    url: soule.ba@control-plane.io
+  - name: ControlPlane Flux Team
+    email: flux-enterprise@control-plane.io
 keywords:
   - flux
   - fluxcd
