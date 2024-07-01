@@ -19,9 +19,9 @@ instance:
   # -- Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration
   cluster: # @schema required: true
     type: kubernetes # @schema enum:[kubernetes,openshift,aws,azure,gcp]
-    multitenant: false # @schema required: true
-    networkPolicy: true # @schema required: true
-    domain: "cluster.local" # @schema required: true
+    multitenant: false
+    networkPolicy: true
+    domain: "cluster.local"
   # -- Storage https://fluxcd.control-plane.io/operator/fluxinstance/#storage-configuration
   storage: # @schema required: false
     class: ""
@@ -34,18 +34,8 @@ instance:
     path: ""
     pullSecret: ""
   kustomize: # @schema required: false
-    # -- Patches https://fluxcd.control-plane.io/operator/fluxinstance/#kustomize-patches
-    patches: # @schema item: object
-      - target:
-          kind: Deployment
-          name: "(kustomize-controller|helm-controller)"
-        patch: |
-          - op: add
-            path: /spec/template/spec/containers/0/args/-
-            value: --concurrent=10
-          - op: add
-            path: /spec/template/spec/containers/0/args/-
-            value: --requeue-dependency=10s
+    # -- Kustomize patches https://fluxcd.control-plane.io/operator/fluxinstance/#kustomize-patches
+    patches: [] # @schema item: object
 
 # -- Common annotations to add to all deployed objects including pods.
 commonAnnotations: { }

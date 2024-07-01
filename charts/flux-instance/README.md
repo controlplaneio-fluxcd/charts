@@ -40,7 +40,7 @@ helm -n flux-system uninstall flux
 | instance.cluster | object | `{"domain":"cluster.local","multitenant":false,"networkPolicy":true,"type":"kubernetes"}` | Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration |
 | instance.components | list | `["source-controller","kustomize-controller","helm-controller","notification-controller"]` | Components https://fluxcd.control-plane.io/operator/fluxinstance/#components-configuration |
 | instance.distribution | object | `{"artifact":"oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:latest","imagePullSecret":"","registry":"ghcr.io/fluxcd","version":"2.x"}` | Distribution https://fluxcd.control-plane.io/operator/fluxinstance/#distribution-configuration |
-| instance.kustomize.patches | list | `[{"patch":"- op: add\n  path: /spec/template/spec/containers/0/args/-\n  value: --concurrent=10\n- op: add\n  path: /spec/template/spec/containers/0/args/-\n  value: --requeue-dependency=10s\n","target":{"kind":"Deployment","name":"(kustomize-controller|helm-controller)"}}]` | Patches https://fluxcd.control-plane.io/operator/fluxinstance/#kustomize-patches |
+| instance.kustomize.patches | list | `[]` | Kustomize patches https://fluxcd.control-plane.io/operator/fluxinstance/#kustomize-patches |
 | instance.storage | object | `{"class":"","size":""}` | Storage https://fluxcd.control-plane.io/operator/fluxinstance/#storage-configuration |
 | instance.sync | object | `{"kind":"GitRepository","path":"","pullSecret":"","ref":"","url":""}` | Sync https://fluxcd.control-plane.io/operator/fluxinstance/#sync-configuration |
 | nameOverride | string | `""` |  |

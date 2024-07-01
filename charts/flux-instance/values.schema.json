@@ -36,11 +36,6 @@
                             "type": "string"
                         }
                     },
-                    "required": [
-                        "multitenant",
-                        "networkPolicy",
-                        "domain"
-                    ],
                     "type": "object"
                 },
                 "components": {

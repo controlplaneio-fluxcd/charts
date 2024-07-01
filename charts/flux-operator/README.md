@@ -2,8 +2,8 @@
 
 ![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.6.0](https://img.shields.io/badge/AppVersion-v0.6.0-informational?style=flat-square)
 
-The [Flux Operator](https://github.com/controlplaneio-fluxcd) provides a declarative API
-for the installation and upgrade of CNCF [Flux](https://fluxcd.io) and the
+The [Flux Operator](https://github.com/controlplaneio-fluxcd/flux-operator) provides a
+declarative API for the installation and upgrade of CNCF [Flux](https://fluxcd.io) and the
 ControlPlane [enterprise distribution](https://control-plane.io/enterprise-for-flux-cd/).
 
 The operator automates the patching for hotfixes and CVEs affecting the Flux controllers container images
