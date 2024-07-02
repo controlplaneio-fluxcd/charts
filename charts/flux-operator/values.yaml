@@ -95,6 +95,7 @@ serviceMonitor: # @schema default: {"create":false,"interval":"60s","scrapeTimeo
   create: false
   interval: 60s
   scrapeTimeout: 30s
+  labels: { }
 
 # -- Marketplace settings.
 marketplace:

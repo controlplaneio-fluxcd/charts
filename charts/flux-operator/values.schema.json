@@ -306,6 +306,10 @@
                 "interval": {
                     "type": "string"
                 },
+                "labels": {
+                    "properties": {},
+                    "type": "object"
+                },
                 "scrapeTimeout": {
                     "type": "string"
                 }
