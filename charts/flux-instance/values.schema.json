@@ -25,6 +25,9 @@
                         "networkPolicy": {
                             "type": "boolean"
                         },
+                        "tenantDefaultServiceAccount": {
+                            "type": "string"
+                        },
                         "type": {
                             "enum": [
                                 "kubernetes",

@@ -19,9 +19,10 @@ instance:
   # -- Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration
   cluster: # @schema required: true
     type: kubernetes # @schema enum:[kubernetes,openshift,aws,azure,gcp]
-    multitenant: false
-    networkPolicy: true
     domain: "cluster.local"
+    networkPolicy: true
+    multitenant: false
+    tenantDefaultServiceAccount: "default"
   # -- Storage https://fluxcd.control-plane.io/operator/fluxinstance/#storage-configuration
   storage: # @schema required: false
     class: ""

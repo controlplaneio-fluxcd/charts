@@ -37,7 +37,7 @@ helm -n flux-system uninstall flux
 | commonAnnotations | object | `{}` | Common annotations to add to all deployed objects including pods. |
 | commonLabels | object | `{}` | Common labels to add to all deployed objects including pods. |
 | fullnameOverride | string | `"flux"` |  |
-| instance.cluster | object | `{"domain":"cluster.local","multitenant":false,"networkPolicy":true,"type":"kubernetes"}` | Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration |
+| instance.cluster | object | `{"domain":"cluster.local","multitenant":false,"networkPolicy":true,"tenantDefaultServiceAccount":"default","type":"kubernetes"}` | Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration |
 | instance.components | list | `["source-controller","kustomize-controller","helm-controller","notification-controller"]` | Components https://fluxcd.control-plane.io/operator/fluxinstance/#components-configuration |
 | instance.distribution | object | `{"artifact":"oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:latest","imagePullSecret":"","registry":"ghcr.io/fluxcd","version":"2.x"}` | Distribution https://fluxcd.control-plane.io/operator/fluxinstance/#distribution-configuration |
 | instance.kustomize.patches | list | `[]` | Kustomize patches https://fluxcd.control-plane.io/operator/fluxinstance/#kustomize-patches |
