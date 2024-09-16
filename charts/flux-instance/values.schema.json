@@ -88,6 +88,20 @@
                     },
                     "type": "object"
                 },
+                "sharding": {
+                    "properties": {
+                        "key": {
+                            "type": "string"
+                        },
+                        "shards": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
                 "storage": {
                     "properties": {
                         "class": {
