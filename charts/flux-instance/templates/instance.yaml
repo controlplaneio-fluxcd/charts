@@ -36,3 +36,8 @@ spec:
   {{- if .Values.instance.storage.size }}
   storage: {{ .Values.instance.storage | toYaml | nindent 4 }}
   {{- end }}
+  {{- if .Values.instance.sharding.shards }}
+  sharding:
+    key: {{ .Values.instance.sharding.key }}
+    shards: {{ .Values.instance.sharding.shards | toYaml | nindent 4 }}
+  {{- end }}

@@ -27,6 +27,10 @@ instance:
   storage: # @schema required: false
     class: ""
     size: ""
+  # -- Sharding https://fluxcd.control-plane.io/operator/fluxinstance/#sharding-configuration
+  sharding: # @schema required: false
+    key: "sharding.fluxcd.io/key"
+    shards: [] # @schema item: string
   # -- Sync https://fluxcd.control-plane.io/operator/fluxinstance/#sync-configuration
   sync: # @schema required: false
     kind: "GitRepository" # @schema enum:[GitRepository,OCIRepository,Bucket]
