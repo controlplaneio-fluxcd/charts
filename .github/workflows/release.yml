@@ -22,7 +22,7 @@ jobs:
       packages: write # for pushing and signing container images.
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
       - name: Setup Helm
         uses: azure/setup-helm@v4.2.0
       - name: Login to GitHub Container Registry
