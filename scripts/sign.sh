@@ -12,5 +12,8 @@ for pkg in ${REPOSITORY_ROOT}/dist/*/*.tgz; do
   if [ -z "${pkg:-}" ]; then
     break
   fi
-  helm push "${pkg}" oci://${REGISTRY} | grep Digest: | awk '{print $NF}' > "$(dirname ${pkg})/digest"
+  chart="$(basename $(dirname ${pkg}))"
+  digest="$(cat $(dirname ${pkg})/digest)"
+  image="${REGISTRY}/${chart}@${digest}"
+  cosign sign --yes ${image}
 done

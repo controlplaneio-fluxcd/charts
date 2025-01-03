@@ -20,12 +20,15 @@ lint:  ## Run Helm linter against all charts.
 
 .PHONY: package
 package: ## Package all Helm charts into the dist directory.
-	mkdir -p dist
-	helm package ./charts/* -d ./dist/
+	./scripts/package.sh
 
 .PHONY: push
 push: ## Push all Helm charts to the Helm repository.
 	./scripts/push.sh
+
+.PHONY: sign
+sign: ## Sign all Helm charts on the Helm repository.
+	./scripts/sign.sh
 
 .PHONY: plugins
 plugins: ## Install required Helm plugins.
