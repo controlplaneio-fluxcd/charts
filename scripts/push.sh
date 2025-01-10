@@ -12,5 +12,5 @@ for pkg in ${REPOSITORY_ROOT}/dist/*/*.tgz; do
   if [ -z "${pkg:-}" ]; then
     break
   fi
-  helm push "${pkg}" oci://${REGISTRY} | grep Digest: | awk '{print $NF}' > "$(dirname ${pkg})/digest"
+  helm push "${pkg}" oci://${REGISTRY} |& grep Digest: | awk '{print $NF}' > "$(dirname ${pkg})/digest"
 done
