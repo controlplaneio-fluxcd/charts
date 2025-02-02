@@ -136,6 +136,9 @@
                             ],
                             "type": "string"
                         },
+                        "interval": {
+                            "type": "string"
+                        },
                         "name": {
                             "type": "string"
                         },

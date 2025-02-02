@@ -37,6 +37,9 @@ spec:
   {{- if .Values.instance.sync.url }}
   sync:
     kind: {{ .Values.instance.sync.kind }}
+    {{- if .Values.instance.sync.interval }}
+    interval: {{ .Values.instance.sync.interval }}
+    {{- end }}
     url: {{ .Values.instance.sync.url }}
     ref: {{ .Values.instance.sync.ref }}
     path: {{ .Values.instance.sync.path }}

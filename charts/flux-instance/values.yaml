@@ -37,6 +37,7 @@ instance:
     shards: [] # @schema item: string
   # -- Sync https://fluxcd.control-plane.io/operator/fluxinstance/#sync-configuration
   sync: # @schema required: false
+    interval: ""
     kind: "GitRepository" # @schema enum:[GitRepository,OCIRepository,Bucket]
     url: ""
     ref: ""
