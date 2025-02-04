@@ -128,15 +128,15 @@
                 },
                 "sync": {
                     "properties": {
+                        "interval": {
+                            "type": "string"
+                        },
                         "kind": {
                             "enum": [
                                 "GitRepository",
                                 "OCIRepository",
                                 "Bucket"
                             ],
-                            "type": "string"
-                        },
-                        "interval": {
                             "type": "string"
                         },
                         "name": {
