@@ -17,6 +17,9 @@ spec:
     version: {{ .Values.instance.distribution.version }}
     registry: {{ .Values.instance.distribution.registry }}
     artifact: {{ .Values.instance.distribution.artifact }}
+    {{- if .Values.instance.distribution.artifactPullSecret }}
+    artifactPullSecret: {{ .Values.instance.distribution.artifactPullSecret }}
+    {{- end }}
     {{- if .Values.instance.distribution.imagePullSecret }}
     imagePullSecret: {{ .Values.instance.distribution.imagePullSecret }}
     {{- end }}
