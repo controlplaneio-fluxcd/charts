@@ -74,6 +74,9 @@
                         "artifact": {
                             "type": "string"
                         },
+                        "artifactPullSecret": {
+                            "type": "string"
+                        },
                         "imagePullSecret": {
                             "type": "string"
                         },
