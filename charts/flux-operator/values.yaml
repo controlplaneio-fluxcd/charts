@@ -108,3 +108,8 @@ marketplace:
   type: ""
   license: ""
   account: ""
+
+
+# -- ClusterRole to bind in the ClusterRoleBinding.
+# -- Default is "cluster-admin", but users can override this to use a different role.
+# clusterRole: "cluster-admin"
