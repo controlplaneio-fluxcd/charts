@@ -1,6 +1,11 @@
 {
     "$schema": "https://json-schema.org/draft/2019-09/schema",
     "properties": {
+        "clusterRole": {
+            "description": "ClusterRole to bind in the ClusterRoleBinding. Defaults to 'cluster-admin', but can be overridden.",
+            "type": "string",
+            "default": "cluster-admin"
+        },
         "affinity": {
             "default": {
                 "nodeAffinity": {
