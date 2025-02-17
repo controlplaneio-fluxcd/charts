@@ -60,6 +60,12 @@ serviceAccount: # @schema default: {"create":true,"automount":true,"name":""}
   automount: true
   name: ""
 
+rbac:
+   # -- Grant the cluster-admin role to the flux-operator service account (required for the Flux Instance deployment).
+  create: true
+  # -- Grant the Kubernetes view, edit and admin roles access to ResourceSet APIs.
+  createAggregation: true
+
 # -- Pod security context settings.
 podSecurityContext: { } # @schema default: {"fsGroup":1337}
 

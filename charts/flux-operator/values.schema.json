@@ -197,6 +197,17 @@
             "default": "system-cluster-critical",
             "type": "string"
         },
+        "rbac": {
+            "properties": {
+                "create": {
+                    "type": "boolean"
+                },
+                "createAggregation": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "readinessProbe": {
             "default": {
                 "httpGet": {
