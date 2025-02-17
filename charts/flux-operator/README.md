@@ -44,6 +44,7 @@ see the Flux Operator [documentation](https://fluxcd.control-plane.io/operator/)
 | livenessProbe | object | `{"httpGet":{"path":"/healthz","port":8081},"initialDelaySeconds":15,"periodSeconds":20}` | Container liveness probe settings. |
 | logLevel | string | `"info"` | Container logging level flag. |
 | marketplace | object | `{"account":"","license":"","type":""}` | Marketplace settings. |
+| multitenancy | object | `{"defaultServiceAccount":"flux-operator","enabled":false}` | Enable [multitenancy lockdown](https://fluxcd.control-plane.io/operator/resourceset/#role-based-access-control) for the ResourceSet APIs. |
 | nameOverride | string | `""` |  |
 | podSecurityContext | object | `{}` | Pod security context settings. |
 | priorityClassName | string | `""` | Pod priority class name. Recommended value is system-cluster-critical. |
