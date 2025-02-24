@@ -20,7 +20,7 @@ jobs:
       - name: Setup kubeconform
         uses: fluxcd/pkg/actions/kubeconform@main
       - name: Setup Helm
-        uses: azure/setup-helm@v4.2.0
+        uses: azure/setup-helm@v4.3.0
       - name: Setup Helm Docs
         uses: gabe565/setup-helm-docs-action@v1
       - run: make plugins manifests lint
