@@ -370,6 +370,13 @@
             },
             "type": "array",
             "uniqueItems": true
+        },
+        "nodeSelector": {
+            "items": {
+                "type": "object"
+            },
+            "type": "array",
+            "uniqueItems": true
         }
     },
     "required": [
