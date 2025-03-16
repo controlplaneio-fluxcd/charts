@@ -364,11 +364,10 @@
             "uniqueItems": true
         },
         "nodeSelector": {
-            "items": {
-                "type": "object"
-            },
-            "type": "array",
-            "uniqueItems": true
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
         }
     },
     "required": [
