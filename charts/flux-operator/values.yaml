@@ -96,6 +96,9 @@ affinity: # @schema default: {"nodeAffinity":{"requiredDuringSchedulingIgnoredDu
 # -- Pod tolerations settings.
 tolerations: [ ] # @schema item: object ; uniqueItems: true
 
+# -- Pod Node Selector settings.
+nodeSelector: { } # @schema type: object
+
 # -- If `true`, the container ports (`8080` and `8081`) are exposed on the host network.
 hostNetwork: false # @schema default: false
 

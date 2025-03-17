@@ -46,6 +46,7 @@ see the Flux Operator [documentation](https://fluxcd.control-plane.io/operator/)
 | marketplace | object | `{"account":"","license":"","type":""}` | Marketplace settings. |
 | multitenancy | object | `{"defaultServiceAccount":"flux-operator","enabled":false}` | Enable [multitenancy lockdown](https://fluxcd.control-plane.io/operator/resourceset/#role-based-access-control) for the ResourceSet APIs. |
 | nameOverride | string | `""` |  |
+| nodeSelector | object | `{}` | Pod Node Selector settings. |
 | podSecurityContext | object | `{}` | Pod security context settings. |
 | priorityClassName | string | `""` | Pod priority class name. Recommended value is system-cluster-critical. |
 | rbac.create | bool | `true` | Grant the cluster-admin role to the flux-operator service account (required for the Flux Instance deployment). |
