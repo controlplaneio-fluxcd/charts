@@ -1,0 +1,78 @@
+name: Setup Bitnami charts-syncer
+description: A GitHub Action for running Bitnami charts-syncer commands
+author: Stefan Prodan
+branding:
+  color: blue
+  icon: command
+inputs:
+  version:
+    description: "Bitnami charts-syncer version e.g. v2.1.0 (defaults to latest stable release)"
+    required: false
+runs:
+  using: composite
+  steps:
+    - name: Download the binary to the runner's cache dir
+      shell: bash
+      run: |
+        VERSION=${{ inputs.version }}
+        if [[ -z "$VERSION" ]] || [[ "$VERSION" == "latest" ]]; then
+          VERSION=$(curl -fsSL -H "Authorization: token ${{github.token}}" https://api.github.com/repos/bitnami/charts-syncer/releases/latest | grep tag_name | cut -d '"' -f 4)
+        fi
+        if [[ -z "$VERSION" ]]; then
+          echo "Unable to determine charts-syncer version"
+          exit 1
+        fi
+        if [[ $VERSION = v* ]]; then
+          VERSION="${VERSION:1}"
+        fi
+
+        OS=$(echo "${RUNNER_OS}" | tr '[:upper:]' '[:lower:]')
+        if [[ "$OS" == "macos" ]]; then
+          OS="darwin"
+        fi
+
+        ARCH=$(echo "${RUNNER_ARCH}" | tr '[:upper:]' '[:lower:]')
+        if [[ "$ARCH" == "x64" ]]; then
+          ARCH="x86_64"
+        fi
+        
+        CLI_EXEC_FILE="charts-syncer"
+        if [[ "$OS" == "windows" ]]; then
+            CLI_EXEC_FILE="${CLI_EXEC_FILE}.exe"
+        fi
+
+        CLI_TOOL_DIR="${RUNNER_TOOL_CACHE}/charts-syncer/${VERSION}/${OS}/${ARCH}"
+        if [[ ! -x "$CLI_TOOL_DIR/$CLI_EXEC_FILE" ]]; then
+          DL_DIR="$(mktemp -dt charts-syncer-XXXXXX)"
+          trap "rm -rf $DL_DIR" EXIT
+
+          echo "Downloading charts-syncer ${VERSION} for ${OS}/${ARCH}"
+          CLI_TARGET_FILE="charts-syncer_${VERSION}_${OS}_${ARCH}.tar.gz"
+          CLI_CHECKSUMS_FILE="checksums.txt"
+
+          CLI_DOWNLOAD_URL="https://github.com/bitnami/charts-syncer/releases/download/v${VERSION}/"
+
+          curl -fsSL -o "$DL_DIR/$CLI_TARGET_FILE" "$CLI_DOWNLOAD_URL/$CLI_TARGET_FILE"
+          curl -fsSL -o "$DL_DIR/$CLI_CHECKSUMS_FILE" "$CLI_DOWNLOAD_URL/$CLI_CHECKSUMS_FILE"
+
+          echo "Verifying checksum"
+          sum=$(openssl sha1 -sha256 "$DL_DIR/$CLI_TARGET_FILE" | awk '{print $2}')
+          expected_sum=$(grep "$CLI_TARGET_FILE" "$DL_DIR/$CLI_CHECKSUMS_FILE" | awk '{print $1}')
+          if [ "$sum" != "$expected_sum" ]; then
+            echo "SHA sum of ${CLI_TARGET_FILE} does not match. Aborting."
+            exit 1
+          fi
+
+          echo "Installing charts-syncer to ${CLI_TOOL_DIR}"
+          mkdir -p "$CLI_TOOL_DIR"
+          tar xzf "$DL_DIR/$CLI_TARGET_FILE" -C "$CLI_TOOL_DIR" $CLI_EXEC_FILE
+          chmod +x "$CLI_TOOL_DIR/$CLI_EXEC_FILE"
+        fi
+
+        echo "Adding charts-syncer to path"
+        echo "$CLI_TOOL_DIR" >> "$GITHUB_PATH"
+
+    - name: "Print the version"
+      shell: bash
+      run: |
+        charts-syncer version

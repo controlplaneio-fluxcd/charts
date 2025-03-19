@@ -1,0 +1,12 @@
+charts:
+  - metrics-server
+source:
+  repo:
+    kind: HELM
+    url: https://kubernetes-sigs.github.io/metrics-server
+target:
+  repo:
+    kind: OCI
+    url: https://ghcr.io/controlplaneio-fluxcd/charts
+skipImages: true
+skipArtifacts: true

@@ -1,0 +1,28 @@
+name: vendor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '00 4 * * 1-5'
+
+jobs:
+  charts-syncer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # for reading the configuration.
+      packages: write # for pushing helm chart artifacts.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Setup charts-syncer
+        uses: ./actions/charts-syncer
+      - name: Sync charts
+        env:
+          TARGET_REPO_AUTH_USERNAME: ${{ github.actor }}
+          TARGET_REPO_AUTH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_CONTAINERS_AUTH_USERNAME: ${{ github.actor }}
+          TARGET_CONTAINERS_AUTH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          charts-syncer sync --latest-version-only --config=sync/metrics-server.yaml
+          charts-syncer sync --latest-version-only --config=sync/ingress-nginx.yaml
+          charts-syncer sync --latest-version-only --config=sync/external-dns.yaml
