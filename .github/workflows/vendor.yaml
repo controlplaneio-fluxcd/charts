@@ -1,0 +1,25 @@
+name: vendor
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  charts-syncer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # for reading the configuration.
+      packages: write # for pushing helm chart artifacts.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Setup charts-syncer
+        uses: ./actions/charts-syncer
+      - name: Print version
+        env:
+          TARGET_CONTAINERS_AUTH_USERNAME: ${{ github.actor }}
+          TARGET_CONTAINERS_AUTH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          charts-syncer version
