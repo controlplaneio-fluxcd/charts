@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4.2.2
       - name: Setup charts-syncer
         uses: ./actions/charts-syncer
-      - name: Sync metrics-server chart
+      - name: Sync charts
         env:
           TARGET_REPO_AUTH_USERNAME: ${{ github.actor }}
           TARGET_REPO_AUTH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -25,3 +25,4 @@ jobs:
           TARGET_CONTAINERS_AUTH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           charts-syncer sync --latest-version-only --config=sync/metrics-server.yaml
+          charts-syncer sync --latest-version-only --config=sync/ingress-nginx.yaml
