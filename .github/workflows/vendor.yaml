@@ -26,3 +26,4 @@ jobs:
         run: |
           charts-syncer sync --latest-version-only --config=sync/metrics-server.yaml
           charts-syncer sync --latest-version-only --config=sync/ingress-nginx.yaml
+          charts-syncer sync --latest-version-only --config=sync/external-dns.yaml
