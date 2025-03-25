@@ -63,6 +63,25 @@
             },
             "type": "object"
         },
+        "apiPriority": {
+            "default": {
+                "enabled": false,
+                "extraServiceAccounts": [],
+                "level": "workload-high"
+            },
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "extraServiceAccounts": {
+                    "type": "array"
+                },
+                "level": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "commonAnnotations": {
             "properties": {},
             "type": "object"

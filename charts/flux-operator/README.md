@@ -33,6 +33,7 @@ see the Flux Operator [documentation](https://fluxcd.control-plane.io/operator/)
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"kubernetes.io/os","operator":"In","values":["linux"]}]}]}}}` | Pod affinity and anti-affinity settings. |
+| apiPriority | object | `{"enabled":false,"extraServiceAccounts":[],"level":"workload-high"}` | Kubernetes [API priority and fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/) settings. |
 | commonAnnotations | object | `{}` | Common annotations to add to all deployed objects including pods. |
 | commonLabels | object | `{}` | Common labels to add to all deployed objects including pods. |
 | extraArgs | list | `[]` | Container extra arguments. |
