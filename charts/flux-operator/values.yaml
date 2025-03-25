@@ -33,6 +33,16 @@ image:
 # Recommended value is system-cluster-critical.
 priorityClassName: "" # @schema default: "system-cluster-critical"
 
+# -- Kubernetes [API priority and fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/) settings.
+apiPriority: # @schema default: {"enabled":false,"level":"workload-high","extraServiceAccounts":[]}
+  enabled: false
+  level: workload-high
+  extraServiceAccounts: []
+#    - name: kustomize-controller
+#      namespace: flux-system
+#    - name: helm-controller
+#      namespace: flux-system
+
 # -- Container resources requests and limits settings.
 resources: # @schema required: true
   limits:
