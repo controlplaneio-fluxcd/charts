@@ -18,6 +18,6 @@ roleRef:
   name: cluster-admin
 subjects:
   - kind: ServiceAccount
-    name: {{ include "flux-operator.fullname" . }}
+    name: {{ include "flux-operator.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
 {{- end }}
