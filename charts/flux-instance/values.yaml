@@ -44,6 +44,8 @@ instance:
     ref: ""
     path: ""
     pullSecret: ""
+    # -- Creates secret and sets it as pullSecret
+    pullSecretStringData: { }
     name: ""
     provider: ""
   kustomize: # @schema required: false

@@ -50,7 +50,9 @@ spec:
     {{- if .Values.instance.sync.provider }}
     provider: {{ .Values.instance.sync.provider }}
     {{- end }}
-    {{- if .Values.instance.sync.pullSecret }}
+    {{- if .Values.instance.sync.pullSecretStringData }}
+    pullSecret: {{ include "flux-instance.fullname" . }}-pull
+    {{- else if .Values.instance.sync.pullSecret }}
     pullSecret: {{ .Values.instance.sync.pullSecret }}
     {{- end }}
   {{- end }}

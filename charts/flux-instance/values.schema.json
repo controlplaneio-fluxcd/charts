@@ -154,6 +154,10 @@
                         "pullSecret": {
                             "type": "string"
                         },
+                        "pullSecretStringData": {
+                            "properties": {},
+                            "type": "object"
+                        },
                         "ref": {
                             "type": "string"
                         },
