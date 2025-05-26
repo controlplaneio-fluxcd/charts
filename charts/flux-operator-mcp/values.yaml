@@ -1,0 +1,103 @@
+# Default values for flux-operator-mcp.
+
+nameOverride: ""
+fullnameOverride: ""
+
+# -- Run the server in readonly mode by disabling the MCP tools that can modify the cluster state.
+readonly: false # @schema default: false
+
+# -- Network policy settings.
+networkPolicy:
+  create: true # @schema default: true
+  ingress:
+    namespaces: [] # @schema item: string ; uniqueItems: true
+
+# -- Common annotations to add to all deployed objects including pods.
+commonAnnotations: { }
+
+# -- Common labels to add to all deployed objects including pods.
+commonLabels: { }
+
+# -- Container image settings.
+# The image tag defaults to the chart appVersion.
+image:
+  repository: ghcr.io/controlplaneio-fluxcd/flux-operator-mcp # @schema required: true
+  tag: ""
+  pullSecrets: [ ] # @schema item: object ; uniqueItems: true
+  imagePullPolicy: IfNotPresent # @schema enum:[IfNotPresent, Always, Never]
+
+# -- Pod priority class name.
+priorityClassName: ""
+
+# -- Kubernetes [API priority and fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/) settings.
+apiPriority: # @schema default: {"enabled":false,"level":"workload-high"}
+  enabled: false
+  level: workload-high
+
+# -- Container resources requests and limits settings.
+resources: # @schema required: true
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests: # @schema default: {"cpu":"10m","memory":"64Mi"}
+    cpu: 10m
+    memory: 64Mi
+
+# -- Container liveness probe settings.
+livenessProbe:
+  tcpSocket:
+    port: http
+
+# -- Container readiness probe settings.
+readinessProbe:
+  tcpSocket:
+    port: http
+
+# -- Pod service account settings.
+# The name of the service account defaults to the release name.
+serviceAccount: # @schema default: {"create":true,"automount":true,"name":""}
+  create: true
+  automount: true
+  name: ""
+
+rbac:
+   # -- Grant the cluster-admin role to the flux-operator-mcp service account
+  create: true
+
+# -- Pod security context settings.
+podSecurityContext: { } # @schema default: {"fsGroup":1337}
+
+# -- Container security context settings.
+# The default is compliant with the pod security restricted profile.
+securityContext: # @schema required: true
+  runAsNonRoot: true # @schema default: true
+  readOnlyRootFilesystem: true # @schema default: true
+  allowPrivilegeEscalation: false # @schema default: false
+  capabilities: # @schema default: {"drop":["ALL"]}
+    drop: # @schema item: string ; uniqueItems: true
+      - "ALL"
+  seccompProfile: # @schema default: {"type":"RuntimeDefault"}
+    type: "RuntimeDefault"
+
+# -- Pod affinity and anti-affinity settings.
+affinity: # @schema default: {"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"kubernetes.io/os","operator":"In","values":["linux"]}]}]}}}
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/os
+              operator: In
+              values:
+                - linux
+
+# -- Pod tolerations settings.
+tolerations: [ ] # @schema item: object ; uniqueItems: true
+
+# -- Pod Node Selector settings.
+nodeSelector: { } # @schema type: object
+
+# -- Container extra environment variables.
+extraEnvs: [ ] # @schema item: object ; uniqueItems: true
+
+# -- Container extra arguments.
+extraArgs: [ ] # @schema item: string ; uniqueItems: true
