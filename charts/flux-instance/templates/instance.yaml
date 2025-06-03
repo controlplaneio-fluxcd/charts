@@ -1,7 +1,7 @@
 apiVersion: fluxcd.controlplane.io/v1
 kind: FluxInstance
 metadata:
-  name: {{ include "flux-instance.fullname" . }}
+  name: flux
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "flux-instance.labels" . | nindent 4 }}
