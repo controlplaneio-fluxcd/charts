@@ -38,6 +38,8 @@ see the Flux Operator [documentation](https://fluxcd.control-plane.io/operator/)
 | commonLabels | object | `{}` | Common labels to add to all deployed objects including pods. |
 | extraArgs | list | `[]` | Container extra arguments. |
 | extraEnvs | list | `[]` | Container extra environment variables. |
+| extraVolumeMounts | list | `[]` | Container extra volume mounts. |
+| extraVolumes | list | `[]` | Pod extra volumes. |
 | fullnameOverride | string | `""` |  |
 | hostNetwork | bool | `false` | If `true`, the container ports (`8080` and `8081`) are exposed on the host network. |
 | image | object | `{"imagePullPolicy":"IfNotPresent","pullSecrets":[],"repository":"ghcr.io/controlplaneio-fluxcd/flux-operator","tag":""}` | Container image settings. The image tag defaults to the chart appVersion. |
