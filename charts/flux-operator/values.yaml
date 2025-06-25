@@ -116,11 +116,17 @@ nodeSelector: { } # @schema type: object
 # -- If `true`, the container ports (`8080` and `8081`) are exposed on the host network.
 hostNetwork: false # @schema default: false
 
+# -- Pod extra volumes.
+extraVolumes: [ ] # @schema item: object ; uniqueItems: true
+
 # -- Container extra environment variables.
 extraEnvs: [ ] # @schema item: object ; uniqueItems: true
 
 # -- Container extra arguments.
 extraArgs: [ ] # @schema item: string ; uniqueItems: true
+
+# -- Container extra volume mounts.
+extraVolumeMounts: [ ] # @schema item: object ; uniqueItems: true
 
 # -- Container logging level flag.
 logLevel: "info" # @schema enum:[debug,info,error]
