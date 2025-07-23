@@ -14,11 +14,16 @@ info() {
 
 info "Generating README files"
 helm-docs --chart-search-root=${REPOSITORY_ROOT}/charts --template-files=helmdocs.gotmpl
+mkdir -p bin
 
 for pkg in ${REPOSITORY_ROOT}/charts/*; do
   if [ -z "${pkg:-}" ]; then
     break
   fi
   info "Generating JSON schema for ${pkg}"
-  helm schema -input ${pkg}/values.yaml -output ${pkg}/values.schema.json -draft 2019
+  helm schema -f ${pkg}/values.yaml -o ${pkg}/values.schema.json --draft 2019 2> ./bin/helm-schema.log
+  cat ./bin/helm-schema.log
+  if grep -q "Error" ./bin/helm-schema.log; then
+    exit 1
+  fi
 done
