@@ -38,12 +38,11 @@ spec:
         - name: healthcheck
           image: "{{ .Values.healthcheck.image.repository }}:{{ .Values.healthcheck.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: "{{ .Values.healthcheck.image.imagePullPolicy }}"
-          command:
-            - kubectl
+          args:
             - wait
-            - fluxinstance/{{ include "flux-instance.fullname" . }}
+            - instance
+            - {{ include "flux-instance.fullname" . }}
             - --namespace={{ .Release.Namespace }}
-            - --for=condition=Ready
             - --timeout={{ .Values.healthcheck.timeout }}
             {{- range .Values.healthcheck.extraArgs }}
             - {{ . }}
