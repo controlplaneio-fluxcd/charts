@@ -20,6 +20,7 @@ instance:
   # -- Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration
   cluster: # @schema required: true
     type: kubernetes # @schema enum:[kubernetes,openshift,aws,azure,gcp]
+    size: "" # @schema enum:['',small,medium,large]
     domain: "cluster.local"
     networkPolicy: true
     multitenant: false
@@ -35,7 +36,7 @@ instance:
   # -- Sharding https://fluxcd.control-plane.io/operator/fluxinstance/#sharding-configuration
   sharding: # @schema required: false
     key: "sharding.fluxcd.io/key"
-    shards: [] # @schema item: string
+    shards: [ ] # @schema item: string
   # -- Sync https://fluxcd.control-plane.io/operator/fluxinstance/#sync-configuration
   sync: # @schema required: false
     interval: 1m
@@ -48,7 +49,7 @@ instance:
     provider: ""
   kustomize: # @schema required: false
     # -- Kustomize patches https://fluxcd.control-plane.io/operator/fluxinstance/#kustomize-patches
-    patches: [] # @schema item: object
+    patches: [ ] # @schema item: object
 
 # -- Common annotations to add to all deployed objects including pods.
 commonAnnotations: { }
