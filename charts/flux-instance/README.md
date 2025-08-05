@@ -39,7 +39,7 @@ helm -n flux-system uninstall flux
 | fullnameOverride | string | `"flux"` |  |
 | healthcheck.enabled | bool | `false` | Enable post-install and post-upgrade health checks. |
 | healthcheck.timeout | string | `"5m"` | Health check timeout in Go duration format. |
-| instance.cluster | object | `{"domain":"cluster.local","multitenant":false,"networkPolicy":true,"tenantDefaultServiceAccount":"default","type":"kubernetes"}` | Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration |
+| instance.cluster | object | `{"domain":"cluster.local","multitenant":false,"networkPolicy":true,"size":"","tenantDefaultServiceAccount":"default","type":"kubernetes"}` | Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration |
 | instance.commonMetadata | object | `{"annotations":{},"labels":{}}` | Common metadata https://fluxcd.control-plane.io/operator/fluxinstance/#common-metadata |
 | instance.components | list | `["source-controller","kustomize-controller","helm-controller","notification-controller"]` | Components https://fluxcd.control-plane.io/operator/fluxinstance/#components-configuration |
 | instance.distribution | object | `{"artifact":"oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:latest","artifactPullSecret":"","imagePullSecret":"","registry":"ghcr.io/fluxcd","version":"2.x"}` | Distribution https://fluxcd.control-plane.io/operator/fluxinstance/#distribution-configuration |
