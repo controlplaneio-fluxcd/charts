@@ -22,7 +22,7 @@ jobs:
       packages: write # for pushing and signing container images.
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
       - name: Setup Helm
         uses: azure/setup-helm@v4.3.0
       - name: Setup Cosign
