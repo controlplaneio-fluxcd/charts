@@ -3,6 +3,9 @@
 nameOverride: ""
 fullnameOverride: ""
 
+# -- MCP server transport. Either 'sse' for server-sent events, or 'http' for streamable HTTP.
+transport: sse # @schema enum:[sse, http]
+
 # -- Run the server in readonly mode by disabling the MCP tools that can modify the cluster state.
 readonly: false # @schema default: false
 
@@ -101,3 +104,19 @@ extraEnvs: [ ] # @schema item: object ; uniqueItems: true
 
 # -- Container extra arguments.
 extraArgs: [ ] # @schema item: string ; uniqueItems: true
+
+# -- Ingress settings.
+ingress: # @schema default: {"enabled":false,"className":"","annotations":{}}
+  enabled: false # @schema default: false
+  className: ""
+  annotations: { } # @schema type: object
+    # nginx.ingress.kubernetes.io/auth-url: "https://$host/authenticate"
+  hosts: [ ] # @schema item: object ; uniqueItems: true
+    # - host: flux-operator-mcp.example.com
+    #   paths:
+    #     - path: /
+    #       pathType: ImplementationSpecific
+  tls: [ ] # @schema item: object ; uniqueItems: true
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local

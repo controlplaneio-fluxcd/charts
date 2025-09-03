@@ -44,14 +44,30 @@ Add the following configuration to your AI assistant to connect to the MCP Serve
 
 ```json
 {
- "mcp": {
-   "servers": {
-     "flux-operator-mcp": {
-       "type": "sse",
-       "url": "http://localhost:9090/sse"
-     }
-   }
- }
+  "mcp": {
+    "servers": {
+      "flux-operator-mcp": {
+        "type": "sse",
+        "url": "http://localhost:9090/sse"
+      }
+    }
+  }
+}
+```
+
+For the streamable HTTP transport, set the Helm value `transport` to `http`
+(defaults to `sse`) and use the following AI assistant configuration:
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "flux-operator-mcp": {
+        "type": "http",
+        "url": "http://localhost:9090/mcp"
+      }
+    }
+  }
 }
 ```
 
@@ -69,6 +85,7 @@ For more information, please refer to the [Flux MCP Server documentation](https:
 | extraEnvs | list | `[]` | Container extra environment variables. |
 | fullnameOverride | string | `""` |  |
 | image | object | `{"imagePullPolicy":"IfNotPresent","pullSecrets":[],"repository":"ghcr.io/controlplaneio-fluxcd/flux-operator-mcp","tag":""}` | Container image settings. The image tag defaults to the chart appVersion. |
+| ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress settings. |
 | livenessProbe | object | `{"tcpSocket":{"port":"http"}}` | Container liveness probe settings. |
 | nameOverride | string | `""` |  |
 | networkPolicy | object | `{"create":true,"ingress":{"namespaces":[]}}` | Network policy settings. |
@@ -82,6 +99,7 @@ For more information, please refer to the [Flux MCP Server documentation](https:
 | securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | Container security context settings. The default is compliant with the pod security restricted profile. |
 | serviceAccount | object | `{"automount":true,"create":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | tolerations | list | `[]` | Pod tolerations settings. |
+| transport | string | `"sse"` | MCP server transport. Either 'sse' for server-sent events, or 'http' for streamable HTTP. |
 
 ## Source Code
 

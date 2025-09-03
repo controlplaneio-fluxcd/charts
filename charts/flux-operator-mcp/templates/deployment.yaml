@@ -44,7 +44,7 @@ spec:
         - name: manager
           args:
             - serve
-            - --transport=sse
+            - --transport={{ .Values.transport }}
             - --port=9090
             - --read-only={{ .Values.readonly }}
             {{- range .Values.extraArgs }}
