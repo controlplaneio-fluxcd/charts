@@ -43,14 +43,30 @@ Add the following configuration to your AI assistant to connect to the MCP Serve
 
 ```json
 {
- "mcp": {
-   "servers": {
-     "flux-operator-mcp": {
-       "type": "sse",
-       "url": "http://localhost:9090/sse"
-     }
-   }
- }
+  "mcp": {
+    "servers": {
+      "flux-operator-mcp": {
+        "type": "sse",
+        "url": "http://localhost:9090/sse"
+      }
+    }
+  }
+}
+```
+
+For the streamable HTTP transport, set the Helm value `transport` to `http`
+(defaults to `sse`) and use the following AI assistant configuration:
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "flux-operator-mcp": {
+        "type": "http",
+        "url": "http://localhost:9090/mcp"
+      }
+    }
+  }
 }
 ```
 
