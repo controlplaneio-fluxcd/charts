@@ -47,6 +47,9 @@ spec:
             - --transport={{ .Values.transport }}
             - --port=9090
             - --read-only={{ .Values.readonly }}
+            {{- if .Values.config.enabled }}
+            - --config=/etc/flux-mcp/config/config.yaml
+            {{- end }}
             {{- range .Values.extraArgs }}
             - {{ . }}
             {{- end }}
@@ -75,9 +78,19 @@ spec:
           volumeMounts:
             - name: temp
               mountPath: /tmp
+          {{- if .Values.config.enabled }}
+            - name: config
+              mountPath: /etc/flux-mcp/config
+              readOnly: true
+          {{- end }}
       volumes:
         - name: temp
           emptyDir: {}
+      {{- if .Values.config.enabled }}
+        - name: config
+          configMap:
+            name: {{ include "flux-operator-mcp.fullname" . }}
+      {{- end }}
       {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}

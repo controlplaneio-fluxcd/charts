@@ -9,6 +9,11 @@ transport: sse # @schema enum:[sse, http]
 # -- Run the server in readonly mode by disabling the MCP tools that can modify the cluster state.
 readonly: false # @schema default: false
 
+# -- Config API. Docs: https://fluxcd.control-plane.io/mcp/config-api/
+config:
+  enabled: false # @schema default: false
+  spec: { } # @schema type: object
+
 # -- Network policy settings.
 networkPolicy:
   create: true # @schema default: true
