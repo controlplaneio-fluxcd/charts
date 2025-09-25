@@ -89,6 +89,18 @@
         "commonLabels": {
             "type": "object"
         },
+        "config": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "spec": {
+                    "type": "object"
+                }
+            }
+        },
         "extraArgs": {
             "type": "array",
             "uniqueItems": true,
