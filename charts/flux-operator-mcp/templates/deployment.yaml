@@ -18,8 +18,13 @@ spec:
       {{- include "flux-operator-mcp.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.commonAnnotations }}
+      {{- if or .Values.config.enabled .Values.commonAnnotations }}
       annotations:
+      {{- end }}
+      {{- if .Values.config.enabled }}
+        checksum/config: {{ (include (print $.Template.BasePath "/configmap.yaml") . | fromYaml).data | toYaml | sha256sum }}
+      {{- end }}
+      {{- with .Values.commonAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
