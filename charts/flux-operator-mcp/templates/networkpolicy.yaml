@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ include "flux-operator-mcp.serviceAccountName" . }}
+  name: {{ include "flux-operator-mcp.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "flux-operator-mcp.labels" . | nindent 4 }}
