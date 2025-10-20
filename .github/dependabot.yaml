@@ -11,5 +11,4 @@ updates:
       interval: "weekly"
     ignore:
       - dependency-name: "sigstore/cosign-installer"
-        versions:
-          - "4.x"
+        update-types: ["version-update:semver-major"]
