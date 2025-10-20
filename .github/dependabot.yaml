@@ -9,3 +9,7 @@ updates:
           - "*"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "sigstore/cosign-installer"
+        versions:
+          - "v4"
