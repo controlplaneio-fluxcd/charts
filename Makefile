@@ -32,7 +32,7 @@ sign: ## Sign all Helm charts on the Helm repository.
 
 .PHONY: plugins
 plugins: ## Install required Helm plugins.
-	helm plugin install https://github.com/losisin/helm-values-schema-json.git
+	helm plugin install https://github.com/losisin/helm-values-schema-json.git --verify=false
 
 .PHONY: help
 help: ## Display this help.
