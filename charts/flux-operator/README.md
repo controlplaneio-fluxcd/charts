@@ -9,6 +9,9 @@ ControlPlane [enterprise distribution](https://control-plane.io/enterprise-for-f
 The operator automates the patching for hotfixes and CVEs affecting the Flux controllers container images
 and enables the configuration of multi-tenancy lockdown on Kubernetes and OpenShift clusters.
 
+The operator comes with the Flux Status Page web UI exposed on port `9080` that allows users to visualize the
+status of the Flux installation and monitor the GitOps delivery pipeline in real-time.
+
 ## Prerequisites
 
 - Kubernetes 1.22+
@@ -61,6 +64,9 @@ see the Flux Operator [documentation](https://fluxcd.control-plane.io/operator/)
 | serviceAccount | object | `{"automount":true,"create":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | serviceMonitor | object | `{"create":false,"interval":"60s","labels":{},"scrapeTimeout":"30s"}` | Prometheus Operator scraping settings. |
 | tolerations | list | `[]` | Pod tolerations settings. |
+| web.enabled | bool | `true` | Enable the Flux Status Page web server on port 8080. |
+| web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy to allow access to the Flux Status Page web interface. |
+| web.serverOnly | bool | `false` | Run the Flux Status Page web server as a standalone deployment (requires a dedicated Helm release). |
 
 ## Source Code
 

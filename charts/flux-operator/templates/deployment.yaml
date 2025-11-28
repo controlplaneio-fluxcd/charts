@@ -56,6 +56,9 @@ spec:
             {{- if .Values.multitenancy.enabledForWorkloadIdentity }}
             - --default-workload-identity-service-account={{ .Values.multitenancy.defaultWorkloadIdentityServiceAccount }}
             {{- end }}
+            {{- if .Values.web.serverOnly }}
+            - --web-server-only=true
+            {{- end }}
             {{- range .Values.extraArgs }}
             - {{ . }}
             {{- end }}
@@ -66,6 +69,8 @@ spec:
                   fieldPath: metadata.namespace
             - name: REPORTING_INTERVAL
               value: {{ .Values.reporting.interval }}
+            - name: WEB_SERVER_PORT
+              value: "{{ ternary "9080" "0" .Values.web.enabled }}"
             {{- with .Values.marketplace.type }}
             - name: MARKETPLACE_TYPE
               value: {{ . }}
@@ -92,6 +97,11 @@ spec:
             - name: http
               containerPort: 8081
               protocol: TCP
+            {{- if .Values.web.enabled }}
+            - name: http-web
+              containerPort: 9080
+              protocol: TCP
+            {{- end }}
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:

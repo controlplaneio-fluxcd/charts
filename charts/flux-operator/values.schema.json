@@ -425,6 +425,25 @@
             "items": {
                 "type": "object"
             }
+        },
+        "web": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "networkPolicy": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "serverOnly": {
+                    "type": "boolean"
+                }
+            }
         }
     }
 }
