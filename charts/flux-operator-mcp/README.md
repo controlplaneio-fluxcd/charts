@@ -81,7 +81,7 @@ For more information, please refer to the [Flux MCP Server documentation](https:
 | apiPriority | object | `{"enabled":false,"level":"workload-high"}` | Kubernetes [API priority and fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/) settings. |
 | commonAnnotations | object | `{}` | Common annotations to add to all deployed objects including pods. |
 | commonLabels | object | `{}` | Common labels to add to all deployed objects including pods. |
-| config | object | `{"enabled":false,"spec":{}}` | Config API. Docs: https://fluxcd.control-plane.io/mcp/config-api/ |
+| config | object | `{"enabled":false,"spec":{}}` | Config API |
 | extraArgs | list | `[]` | Container extra arguments. |
 | extraEnvs | list | `[]` | Container extra environment variables. |
 | fullnameOverride | string | `""` |  |

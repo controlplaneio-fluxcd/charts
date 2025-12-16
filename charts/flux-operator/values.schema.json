@@ -425,6 +425,62 @@
             "items": {
                 "type": "object"
             }
+        },
+        "web": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "type": "object"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "ingress": {
+                    "default": {
+                        "annotations": {},
+                        "className": "",
+                        "enabled": false
+                    },
+                    "type": "object",
+                    "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "className": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "default": false,
+                            "type": "boolean"
+                        },
+                        "hosts": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "object"
+                            }
+                        },
+                        "tls": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "networkPolicy": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "serverOnly": {
+                    "type": "boolean"
+                }
+            }
         }
     }
 }

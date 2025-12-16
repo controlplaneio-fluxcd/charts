@@ -8,6 +8,9 @@ ControlPlane [enterprise distribution](https://control-plane.io/enterprise-for-f
 The operator automates the patching for hotfixes and CVEs affecting the Flux controllers container images
 and enables the configuration of multi-tenancy lockdown on Kubernetes and OpenShift clusters.
 
+The operator comes with the Flux Status Page web UI exposed on port `9080` that allows users to visualize the
+status of the Flux installation and monitor the GitOps delivery pipeline in real-time.
+
 ## Prerequisites
 
 - Kubernetes 1.22+
@@ -25,7 +28,7 @@ helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-opera
 ```
 
 To deploy the Flux controllers and to configure automated updates,
-see the Flux Operator [documentation](https://fluxcd.control-plane.io/operator/).
+see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 
 {{ template "chart.valuesSection" . }}
 
