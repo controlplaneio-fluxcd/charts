@@ -17,6 +17,10 @@ reporting:
 web:
   # -- Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080.
   enabled: true
+  # -- Config API. Docs: https://fluxoperator.dev/docs/web-ui/web-config-api/
+  config:
+    enabled: false # @schema default: false
+    spec: { } # @schema type: object
   # -- Create a NetworkPolicy to allow access to the Flux Status web interface.
   networkPolicy:
     create: true

@@ -64,6 +64,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | serviceAccount | object | `{"automount":true,"create":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | serviceMonitor | object | `{"create":false,"interval":"60s","labels":{},"scrapeTimeout":"30s"}` | Prometheus Operator scraping settings. |
 | tolerations | list | `[]` | Pod tolerations settings. |
+| web.config | object | `{"enabled":false,"spec":{}}` | Config API. Docs: https://fluxoperator.dev/docs/web-ui/web-config-api/ |
 | web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080. |
 | web.ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress settings for the Flux Status web interface. |
 | web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy to allow access to the Flux Status web interface. |

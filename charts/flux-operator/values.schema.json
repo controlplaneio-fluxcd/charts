@@ -429,6 +429,18 @@
         "web": {
             "type": "object",
             "properties": {
+                "config": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "default": false,
+                            "type": "boolean"
+                        },
+                        "spec": {
+                            "type": "object"
+                        }
+                    }
+                },
                 "enabled": {
                     "type": "boolean"
                 },
