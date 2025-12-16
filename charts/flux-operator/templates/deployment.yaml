@@ -22,6 +22,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
         prometheus.io/path: "/metrics"
+        {{- if .Values.web.config }}
+        checksum/web-config: {{ (include (print $.Template.BasePath "/web-secret.yaml") . | fromYaml).stringData | toYaml | sha256sum }}
+        {{- end }}
         {{- with .Values.commonAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -58,6 +61,9 @@ spec:
             {{- end }}
             {{- if .Values.web.serverOnly }}
             - --web-server-only=true
+            {{- end }}
+            {{- if .Values.web.config }}
+            - --web-config=/etc/flux-operator/web/config.yaml
             {{- end }}
             {{- range .Values.extraArgs }}
             - {{ . }}
@@ -111,12 +117,22 @@ spec:
           volumeMounts:
             - name: temp
               mountPath: /tmp
+          {{- if .Values.web.config }}
+            - name: web-config
+              mountPath: /etc/flux-operator/web
+              readOnly: true
+          {{- end }}
             {{- if .Values.extraVolumeMounts }}
               {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
       volumes:
         - name: temp
           emptyDir: {}
+      {{- if .Values.web.config }}
+        - name: web-config
+          secret:
+            secretName: {{ include "flux-operator.fullname" . }}-web-config
+      {{- end }}
         {{- if .Values.extraVolumes }}
           {{- toYaml .Values.extraVolumes | nindent 8 }}
         {{- end }}

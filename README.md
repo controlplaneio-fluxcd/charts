@@ -13,6 +13,7 @@ This repository contains the Helm charts for the ControlPlane Flux CD projects.
 - `ghcr.io/controlplaneio-fluxcd/charts/metrics-server`
 - `ghcr.io/controlplaneio-fluxcd/charts/external-dns`
 - `ghcr.io/controlplaneio-fluxcd/charts/ingress-nginx`
+- `ghcr.io/controlplaneio-fluxcd/charts/dex`
 
 The vendored charts are [synced](.github/workflows/vendor.yaml) from
 the upstream Kubernetes HTTP/S Helm repositories on a daily basis.
