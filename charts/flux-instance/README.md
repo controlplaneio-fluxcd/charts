@@ -20,7 +20,7 @@ helm -n flux-system install flux oci://ghcr.io/controlplaneio-fluxcd/charts/flux
 ```
 
 For more information on the available configuration options,
-see the [Flux Instance documentation](https://fluxcd.control-plane.io/operator/fluxinstance/).
+see the [Flux Instance documentation](https://fluxoperator.dev/docs/crd/fluxinstance/).
 
 ## Uninstalling the Chart
 
@@ -39,14 +39,14 @@ helm -n flux-system uninstall flux
 | fullnameOverride | string | `"flux"` |  |
 | healthcheck.enabled | bool | `false` | Enable post-install and post-upgrade health checks. |
 | healthcheck.timeout | string | `"5m"` | Health check timeout in Go duration format. |
-| instance.cluster | object | `{"domain":"cluster.local","multitenant":false,"networkPolicy":true,"size":"","tenantDefaultServiceAccount":"default","type":"kubernetes"}` | Cluster https://fluxcd.control-plane.io/operator/fluxinstance/#cluster-configuration |
-| instance.commonMetadata | object | `{"annotations":{},"labels":{}}` | Common metadata https://fluxcd.control-plane.io/operator/fluxinstance/#common-metadata |
-| instance.components | list | `["source-controller","kustomize-controller","helm-controller","notification-controller"]` | Components https://fluxcd.control-plane.io/operator/fluxinstance/#components-configuration |
-| instance.distribution | object | `{"artifact":"oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:latest","artifactPullSecret":"","imagePullSecret":"","registry":"ghcr.io/fluxcd","version":"2.x"}` | Distribution https://fluxcd.control-plane.io/operator/fluxinstance/#distribution-configuration |
-| instance.kustomize.patches | list | `[]` | Kustomize patches https://fluxcd.control-plane.io/operator/fluxinstance/#kustomize-patches |
-| instance.sharding | object | `{"key":"sharding.fluxcd.io/key","shards":[]}` | Sharding https://fluxcd.control-plane.io/operator/fluxinstance/#sharding-configuration |
-| instance.storage | object | `{"class":"","size":""}` | Storage https://fluxcd.control-plane.io/operator/fluxinstance/#storage-configuration |
-| instance.sync | object | `{"interval":"1m","kind":"GitRepository","name":"","path":"","provider":"","pullSecret":"","ref":"","url":""}` | Sync https://fluxcd.control-plane.io/operator/fluxinstance/#sync-configuration |
+| instance.cluster | object | `{"domain":"cluster.local","multitenant":false,"networkPolicy":true,"size":"","tenantDefaultServiceAccount":"default","type":"kubernetes"}` | Cluster https://fluxoperator.dev/docs/crd/fluxinstance/#cluster-configuration |
+| instance.commonMetadata | object | `{"annotations":{},"labels":{}}` | Common metadata https://fluxoperator.dev/docs/crd/fluxinstance/#common-metadata |
+| instance.components | list | `["source-controller","kustomize-controller","helm-controller","notification-controller"]` | Components https://fluxoperator.dev/docs/crd/fluxinstance/#components-configuration |
+| instance.distribution | object | `{"artifact":"oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:latest","artifactPullSecret":"","imagePullSecret":"","registry":"ghcr.io/fluxcd","variant":"","version":"2.x"}` | Distribution https://fluxoperator.dev/docs/crd/fluxinstance/#distribution-configuration |
+| instance.kustomize.patches | list | `[]` | Kustomize patches https://fluxoperator.dev/docs/crd/fluxinstance/#kustomize-patches |
+| instance.sharding | object | `{"key":"sharding.fluxcd.io/key","shards":[]}` | Sharding https://fluxoperator.dev/docs/crd/fluxinstance/#sharding-configuration |
+| instance.storage | object | `{"class":"","size":""}` | Storage https://fluxoperator.dev/docs/crd/fluxinstance/#storage-configuration |
+| instance.sync | object | `{"interval":"1m","kind":"GitRepository","name":"","path":"","provider":"","pullSecret":"","ref":"","url":""}` | Sync https://fluxoperator.dev/docs/crd/fluxinstance/#sync-configuration |
 | nameOverride | string | `""` |  |
 
 ## Source Code

@@ -23,6 +23,9 @@ spec:
     {{- if .Values.instance.distribution.imagePullSecret }}
     imagePullSecret: {{ .Values.instance.distribution.imagePullSecret }}
     {{- end }}
+    {{- if .Values.instance.distribution.variant }}
+    variant: {{ .Values.instance.distribution.variant }}
+    {{- end }}
   components: {{ .Values.instance.components | toYaml | nindent 4 }}
   cluster:
     {{- range $key, $value := .Values.instance.cluster }}
