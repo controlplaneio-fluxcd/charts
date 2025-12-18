@@ -17,7 +17,7 @@ status of the Flux installation and monitor the GitOps delivery pipeline in real
 - Kubernetes 1.22+
 - Helm 3.8+
 
-## Installing the Chart
+## Installing Flux Operator
 
 To install the operator in the `flux-system` namespace:
 
@@ -25,6 +25,20 @@ To install the operator in the `flux-system` namespace:
 helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
   --namespace flux-system \
   --create-namespace \
+  --wait
+```
+
+## Installing the Flux Web UI as a Standalone Deployment
+
+You can install the Flux Status Web UI as a dedicated deployment in your Kubernetes cluster,
+separate from the Flux Operator with:
+
+```console
+helm install flux-web oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
+  --namespace flux-system \
+  --set fullnameOverride=flux-web \
+  --set web.serverOnly=true \
+  --set installCRDs=false \
   --wait
 ```
 
