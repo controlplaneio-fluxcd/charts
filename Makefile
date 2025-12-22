@@ -30,6 +30,10 @@ push: ## Push all Helm charts to the Helm repository.
 sign: ## Sign all Helm charts on the Helm repository.
 	./scripts/sign.sh
 
+.PHONY: sync-quay
+sync-quay: ## Sync latest images and charts to https://quay.io/organization/fluxoperatordev
+	./scripts/quay.sh
+
 .PHONY: plugins
 plugins: ## Install required Helm plugins.
 	helm plugin install https://github.com/losisin/helm-values-schema-json.git --verify=false
