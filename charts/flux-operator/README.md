@@ -79,6 +79,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | serviceMonitor | object | `{"create":false,"interval":"60s","labels":{},"scrapeTimeout":"30s"}` | Prometheus Operator scraping settings. |
 | tolerations | list | `[]` | Pod tolerations settings. |
 | web.config | object | `{}` | The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/) |
+| web.configSecretName | string | `""` | Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`. |
 | web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080. |
 | web.httpRoute | object | `{"annotations":{},"enabled":false,"hostnames":[],"parentRefs":[]}` | Gateway API HTTPRoute settings for the Flux Status web interface. |
 | web.ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress settings for the Flux Status web interface. |

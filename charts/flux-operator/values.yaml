@@ -19,6 +19,8 @@ web:
   enabled: true
   # -- The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/)
   config: { } # @schema type: object
+  # -- Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`.
+  configSecretName: "" # @schema default: ""
   # -- Create a NetworkPolicy to allow access to the Flux Status web interface.
   networkPolicy:
     create: true
