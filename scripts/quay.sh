@@ -33,6 +33,11 @@ if ! command -v flux &> /dev/null; then
     fatal "flux CLI is not installed. Install it from: https://fluxcd.io/flux/installation/"
 fi
 
+# Check if cosign is installed
+if ! command -v cosign &> /dev/null; then
+    fatal "cosign CLI is not installed. Install it from: https://docs.sigstore.dev/cosign/system_config/installation/"
+fi
+
 # Get the latest release version
 info "Fetching latest release from ${REPO}"
 VERSION=$(gh release view --repo "${REPO}" --json tagName -q '.tagName')
@@ -60,6 +65,7 @@ FO_IMAGES=(
 for IMAGE in "${FO_IMAGES[@]}"; do
     info "Copying ${IMAGE}"
     crane copy --no-clobber "${SOURCE_ORG}${IMAGE}" "${DST_ORG}${IMAGE}" || true
+    cosign copy --only=sig "${SOURCE_ORG}${IMAGE}" "${DST_ORG}${IMAGE}" || true
     info "Fetching digest for ${IMAGE}"
     crane digest "${DST_ORG}${IMAGE}"
 done
@@ -77,6 +83,7 @@ FO_CHARTS=(
 for CHART in "${FO_CHARTS[@]}"; do
     info "Copying ${CHART}"
     crane copy --no-clobber "${SOURCE_ORG}${CHART}" "${DST_ORG}${CHART}" || true
+    cosign copy --only=sig "${SOURCE_ORG}${CHART}" "${DST_ORG}${CHART}" || true
     info "Fetching digest for ${CHART}"
     crane digest "${DST_ORG}${CHART}"
 done
@@ -89,6 +96,7 @@ for IMAGE in ${FLUX_IMAGES}; do
     IMAGE_NAME_TAG="${IMAGE#ghcr.io/fluxcd/}"
     info "Copying ${IMAGE_NAME_TAG}"
     crane copy --no-clobber "${IMAGE}" "${DST_ORG}${IMAGE_NAME_TAG}" || true
+    cosign copy --only=sig "${IMAGE}" "${DST_ORG}${IMAGE_NAME_TAG}" || true
     info "Fetching digest for ${IMAGE_NAME_TAG}"
     crane digest "${DST_ORG}${IMAGE_NAME_TAG}"
 done
