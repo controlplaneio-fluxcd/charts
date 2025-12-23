@@ -80,6 +80,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | tolerations | list | `[]` | Pod tolerations settings. |
 | web.config | object | `{}` | The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/) |
 | web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080. |
+| web.httpRoute | object | `{"annotations":{},"enabled":false,"hostnames":[],"parentRefs":[]}` | Gateway API HTTPRoute settings for the Flux Status web interface. |
 | web.ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress settings for the Flux Status web interface. |
 | web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy to allow access to the Flux Status web interface. |
 | web.serverOnly | bool | `false` | Run the Flux Status web server as a standalone deployment (requires a dedicated Helm release). |

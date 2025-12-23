@@ -38,6 +38,16 @@ web:
     #  - secretName: flux-operator-tls
     #    hosts:
     #      - flux-operator.example.com
+  # -- Gateway API HTTPRoute settings for the Flux Status web interface.
+  httpRoute: # @schema default: {"enabled":false,"annotations":{},"parentRefs":[],"hostnames":[]}
+    enabled: false # @schema default: false
+    annotations: { } # @schema type: object
+    parentRefs: [ ] # @schema item: object ; uniqueItems: true
+    # - name: my-gateway
+    #   namespace: gateway-system
+    #   sectionName: https
+    hostnames: [ ] # @schema item: string ; uniqueItems: true
+    # - flux.example.com
 
 # -- Install and upgrade the custom resource definitions.
 installCRDs: true # @schema default: true
