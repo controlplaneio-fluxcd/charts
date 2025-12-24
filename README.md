@@ -12,7 +12,7 @@ The charts are signed with `cosign` and published
 as OCI artifacts to the following registries:
 
 - `ghcr.io/controlplaneio-fluxcd/charts`
-- `quay.io/fluxoperator/charts`
+- `quay.io/fluxoperatordev/charts`
 
 ## Vendored Charts
 
