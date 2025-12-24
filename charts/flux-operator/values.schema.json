@@ -432,6 +432,15 @@
                 "config": {
                     "type": "object"
                 },
+                "configSecretRef": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    }
+                },
                 "enabled": {
                     "type": "boolean"
                 },
