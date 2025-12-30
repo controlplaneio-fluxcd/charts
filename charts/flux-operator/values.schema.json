@@ -432,6 +432,10 @@
                 "config": {
                     "type": "object"
                 },
+                "configSecretName": {
+                    "default": "",
+                    "type": "string"
+                },
                 "enabled": {
                     "type": "boolean"
                 },

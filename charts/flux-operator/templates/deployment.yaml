@@ -22,7 +22,7 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
         prometheus.io/path: "/metrics"
-        {{- if .Values.web.config }}
+        {{- if and .Values.web.config (not .Values.web.configSecretName) }}
         checksum/web-config: {{ (include (print $.Template.BasePath "/web-secret.yaml") . | fromYaml).stringData | toYaml | sha256sum }}
         {{- end }}
         {{- with .Values.commonAnnotations }}
@@ -62,8 +62,11 @@ spec:
             {{- if .Values.web.serverOnly }}
             - --web-server-only=true
             {{- end }}
-            {{- if .Values.web.config }}
+            {{- if and .Values.web.config (not .Values.web.configSecretName) }}
             - --web-config=/etc/flux-operator/web/config.yaml
+            {{- end }}
+            {{- if and .Values.web.configSecretName (not .Values.web.config) }}
+            - --web-config-secret-name={{ .Values.web.configSecretName }}
             {{- end }}
             {{- range .Values.extraArgs }}
             - {{ . }}
@@ -117,7 +120,7 @@ spec:
           volumeMounts:
             - name: temp
               mountPath: /tmp
-          {{- if .Values.web.config }}
+          {{- if and .Values.web.config (not .Values.web.configSecretName) }}
             - name: web-config
               mountPath: /etc/flux-operator/web
               readOnly: true
@@ -128,7 +131,7 @@ spec:
       volumes:
         - name: temp
           emptyDir: {}
-      {{- if .Values.web.config }}
+      {{- if and .Values.web.config (not .Values.web.configSecretName) }}
         - name: web-config
           secret:
             secretName: {{ include "flux-operator.fullname" . }}-web-config
