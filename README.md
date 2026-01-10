@@ -1,5 +1,10 @@
 # Flux Operator Helm Charts
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/flux-operator)](https://artifacthub.io/packages/helm/flux-operator/flux-operator)
+[![test](https://github.com/controlplaneio-fluxcd/charts/actions/workflows/test.yaml/badge.svg)](https://github.com/controlplaneio-fluxcd/charts/actions/workflows/test.yaml)
+[![e2e](https://github.com/controlplaneio-fluxcd/charts/actions/workflows/e2e.yaml/badge.svg)](https://github.com/controlplaneio-fluxcd/charts/actions/workflows/e2e.yaml)
+[![license](https://img.shields.io/github/license/controlplaneio-fluxcd/charts.svg)](https://github.com/controlplaneio-fluxcd/charts/blob/main/LICENSE)
+
 This repository contains the Helm charts for [Flux Operator](https://fluxoperator.dev) and its components.
 
 ## Flux Charts
