@@ -18,13 +18,8 @@ spec:
       {{- include "flux-operator-mcp.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- if or .Values.config.enabled .Values.commonAnnotations }}
-      annotations:
-      {{- end }}
-      {{- if .Values.config.enabled }}
-        checksum/config: {{ (include (print $.Template.BasePath "/configmap.yaml") . | fromYaml).data | toYaml | sha256sum }}
-      {{- end }}
       {{- with .Values.commonAnnotations }}
+      annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
@@ -52,9 +47,6 @@ spec:
             - --transport={{ .Values.transport }}
             - --port=9090
             - --read-only={{ .Values.readonly }}
-            {{- if .Values.config.enabled }}
-            - --config=/etc/flux-mcp/config/config.yaml
-            {{- end }}
             {{- range .Values.extraArgs }}
             - {{ . }}
             {{- end }}
@@ -83,19 +75,9 @@ spec:
           volumeMounts:
             - name: temp
               mountPath: /tmp
-          {{- if .Values.config.enabled }}
-            - name: config
-              mountPath: /etc/flux-mcp/config
-              readOnly: true
-          {{- end }}
       volumes:
         - name: temp
           emptyDir: {}
-      {{- if .Values.config.enabled }}
-        - name: config
-          configMap:
-            name: {{ include "flux-operator-mcp.fullname" . }}
-      {{- end }}
       {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}

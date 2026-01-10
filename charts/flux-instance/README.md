@@ -8,7 +8,7 @@ to install, configure and automatically upgrade Flux.
 
 ## Prerequisites
 
-- Kubernetes 1.22+
+- Kubernetes 1.30+
 - Helm 3.8+
 
 ## Installing the Chart

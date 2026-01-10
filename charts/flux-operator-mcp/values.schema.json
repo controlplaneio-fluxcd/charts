@@ -89,18 +89,6 @@
         "commonLabels": {
             "type": "object"
         },
-        "config": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "default": false,
-                    "type": "boolean"
-                },
-                "spec": {
-                    "type": "object"
-                }
-            }
-        },
         "extraArgs": {
             "type": "array",
             "uniqueItems": true,
@@ -117,6 +105,38 @@
         },
         "fullnameOverride": {
             "type": "string"
+        },
+        "httpRoute": {
+            "default": {
+                "annotations": {},
+                "enabled": false,
+                "hostnames": [],
+                "parentRefs": []
+            },
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object"
+                },
+                "enabled": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "hostnames": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "parentRefs": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
         },
         "image": {
             "type": "object",
