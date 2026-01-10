@@ -22,7 +22,7 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
         prometheus.io/path: "/metrics"
-        {{- if and .Values.web.config (not .Values.web.configSecretName) }}
+        {{- if include "flux-operator.createWebConfigSecret" . }}
         checksum/web-config: {{ (include (print $.Template.BasePath "/web-secret.yaml") . | fromYaml).stringData | toYaml | sha256sum }}
         {{- end }}
         {{- with .Values.commonAnnotations }}
@@ -59,13 +59,13 @@ spec:
             {{- if .Values.multitenancy.enabledForWorkloadIdentity }}
             - --default-workload-identity-service-account={{ .Values.multitenancy.defaultWorkloadIdentityServiceAccount }}
             {{- end }}
-            {{- if .Values.web.serverOnly }}
+            {{- if include "flux-operator.webServerOnly" . }}
             - --web-server-only=true
             {{- end }}
-            {{- if and .Values.web.config (not .Values.web.configSecretName) }}
+            {{- if include "flux-operator.createWebConfigSecret" . }}
             - --web-config=/etc/flux-operator/web/config.yaml
             {{- end }}
-            {{- if and .Values.web.configSecretName (not .Values.web.config) }}
+            {{- if include "flux-operator.useWebConfigSecret" . }}
             - --web-config-secret-name={{ .Values.web.configSecretName }}
             {{- end }}
             {{- range .Values.extraArgs }}
@@ -120,7 +120,7 @@ spec:
           volumeMounts:
             - name: temp
               mountPath: /tmp
-          {{- if and .Values.web.config (not .Values.web.configSecretName) }}
+          {{- if include "flux-operator.createWebConfigSecret" . }}
             - name: web-config
               mountPath: /etc/flux-operator/web
               readOnly: true
@@ -131,7 +131,7 @@ spec:
       volumes:
         - name: temp
           emptyDir: {}
-      {{- if and .Values.web.config (not .Values.web.configSecretName) }}
+      {{- if include "flux-operator.createWebConfigSecret" . }}
         - name: web-config
           secret:
             secretName: {{ include "flux-operator.fullname" . }}-web-config
