@@ -14,7 +14,7 @@ status of the Flux installation and monitor the GitOps delivery pipeline in real
 
 ## Prerequisites
 
-- Kubernetes 1.22+
+- Kubernetes 1.30+
 - Helm 3.8+
 
 ## Installing Flux Operator

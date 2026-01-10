@@ -10,7 +10,7 @@ and perform operations using conversational prompts.
 
 ## Prerequisites
 
-- Kubernetes 1.27+
+- Kubernetes 1.30+
 - Helm 3.8+
 
 ## Installing the Chart
@@ -71,7 +71,7 @@ For the streamable HTTP transport, set the Helm value `transport` to `http`
 }
 ```
 
-For more information, please refer to the [Flux MCP Server documentation](https://fluxcd.control-plane.io/mcp/).
+For more information, please refer to the [Flux MCP Server documentation](https://fluxoperator.dev/docs/mcp/install/).
 
 ## Values
 
