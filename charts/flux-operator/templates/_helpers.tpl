@@ -86,3 +86,13 @@ Returns "true" when web is enabled and serverOnly mode is set.
 true
 {{- end -}}
 {{- end }}
+
+{{/*
+Check if web roles should be created.
+Returns "true" when web is enabled and createRoles is enabled.
+*/}}
+{{- define "flux-operator.createWebRoles" -}}
+{{- if and .Values.web.enabled .Values.web.rbac.createRoles -}}
+true
+{{- end -}}
+{{- end }}

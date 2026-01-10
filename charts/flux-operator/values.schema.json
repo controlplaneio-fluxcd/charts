@@ -513,6 +513,15 @@
                         }
                     }
                 },
+                "rbac": {
+                    "type": "object",
+                    "properties": {
+                        "createRoles": {
+                            "default": true,
+                            "type": "boolean"
+                        }
+                    }
+                },
                 "serverOnly": {
                     "type": "boolean"
                 }
