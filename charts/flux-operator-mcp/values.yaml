@@ -9,11 +9,6 @@ transport: sse # @schema enum:[sse, http]
 # -- Run the server in readonly mode by disabling the MCP tools that can modify the cluster state.
 readonly: false # @schema default: false
 
-# -- Config API
-config:
-  enabled: false # @schema default: false
-  spec: { } # @schema type: object
-
 # -- Network policy settings.
 networkPolicy:
   create: true # @schema default: true
@@ -125,3 +120,14 @@ ingress: # @schema default: {"enabled":false,"className":"","annotations":{}}
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+# -- Gateway API HTTPRoute settings.
+httpRoute: # @schema default: {"enabled":false,"annotations":{},"parentRefs":[],"hostnames":[]}
+  enabled: false # @schema default: false
+  annotations: { } # @schema type: object
+  parentRefs: [ ] # @schema item: object ; uniqueItems: true
+  # - name: my-gateway
+  #   namespace: gateway-system
+  #   sectionName: https
+  hostnames: [ ] # @schema item: string ; uniqueItems: true
+  # - flux-operator-mcp.example.com
