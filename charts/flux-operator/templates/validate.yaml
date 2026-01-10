@@ -1,6 +1,0 @@
-{{- /*
-Validate web config options.
-*/ -}}
-{{- if and .Values.web.config .Values.web.configSecretName -}}
-{{- fail "Invalid values: 'web.config' and 'web.configSecretName' cannot both be set. Set at most one." -}}
-{{- end -}}

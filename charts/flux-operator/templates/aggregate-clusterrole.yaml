@@ -1,4 +1,4 @@
-{{- if and .Values.rbac.createAggregation (not (and .Values.web.enabled .Values.web.serverOnly)) }}
+{{- if and .Values.rbac.createAggregation (not (include "flux-operator.webServerOnly" .)) }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:

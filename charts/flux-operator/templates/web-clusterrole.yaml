@@ -1,4 +1,4 @@
-{{- if and .Values.web.enabled .Values.web.serverOnly }}
+{{- if include "flux-operator.webServerOnly" . }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
