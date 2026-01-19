@@ -72,6 +72,6 @@ jobs:
           username: "fluxoperatordev+bot"
           password: ${{ secrets.QUAY_TOKEN }}
       - name: Sync to Quay
-        run: make quay-sync
+        run: make sync-quay
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
