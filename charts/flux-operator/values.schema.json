@@ -528,6 +528,10 @@
                 },
                 "serverOnly": {
                     "type": "boolean"
+                },
+                "serverReplicas": {
+                    "default": 1,
+                    "type": "integer"
                 }
             }
         }

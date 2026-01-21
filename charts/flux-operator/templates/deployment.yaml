@@ -13,6 +13,9 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
+  {{- if include "flux-operator.setWebServerReplicas" . }}
+  replicas: {{ .Values.web.serverReplicas }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "flux-operator.selectorLabels" . | nindent 6 }}
