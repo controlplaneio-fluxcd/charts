@@ -84,7 +84,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | web.httpRoute | object | `{"annotations":{},"enabled":false,"hostnames":[],"parentRefs":[]}` | Gateway API HTTPRoute settings for the Flux Status web interface. |
 | web.ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress settings for the Flux Status web interface. |
 | web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy to allow access to the Flux Status web interface. |
-| web.rbac | object | `{"createRoles":true}` | Create standard roles for [user access management](https://fluxoperator.dev/docs/web-ui/user-management/). |
+| web.rbac | object | `{"createAggregation":false,"createRoles":true}` | Create standard roles for [user access management](https://fluxoperator.dev/docs/web-ui/user-management/). |
 | web.serverOnly | bool | `false` | Run the Flux Status web server as a standalone deployment (requires a dedicated Helm release). |
 
 ## Source Code

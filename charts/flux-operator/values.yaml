@@ -27,6 +27,7 @@ web:
   # -- Create standard roles for [user access management](https://fluxoperator.dev/docs/web-ui/user-management/).
   rbac:
     createRoles: true # @schema default: true
+    createAggregation: false # @schema default: false
   # -- Run the Flux Status web server as a standalone deployment (requires a dedicated Helm release).
   serverOnly: false
   # -- Ingress settings for the Flux Status web interface.

@@ -96,3 +96,13 @@ Returns "true" when web is enabled and createRoles is enabled.
 true
 {{- end -}}
 {{- end }}
+
+{{/*
+Check if web roles aggregation should be created.
+Returns "true" when web is enabled and createAggregation is enabled.
+*/}}
+{{- define "flux-operator.createWebRolesAggregation" -}}
+{{- if and .Values.web.enabled .Values.web.rbac.createAggregation -}}
+true
+{{- end -}}
+{{- end }}
