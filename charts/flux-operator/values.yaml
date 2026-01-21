@@ -30,6 +30,8 @@ web:
     createAggregation: false # @schema default: false
   # -- Run the Flux Status web server as a standalone deployment (requires a dedicated Helm release).
   serverOnly: false
+  # -- Number of replicas for the Flux Status web server standalone deployment (only applicable if `web.serverOnly` is `true`).
+  serverReplicas: 1 # @schema default: 1
   # -- Ingress settings for the Flux Status web interface.
   ingress: # @schema default: {"enabled":false,"className":"","annotations":{}}
     enabled: false # @schema default: false

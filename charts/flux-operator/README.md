@@ -86,6 +86,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy to allow access to the Flux Status web interface. |
 | web.rbac | object | `{"createAggregation":false,"createRoles":true}` | Create standard roles for [user access management](https://fluxoperator.dev/docs/web-ui/user-management/). |
 | web.serverOnly | bool | `false` | Run the Flux Status web server as a standalone deployment (requires a dedicated Helm release). |
+| web.serverReplicas | int | `1` | Number of replicas for the Flux Status web server standalone deployment (only applicable if `web.serverOnly` is `true`). |
 
 ## Source Code
 

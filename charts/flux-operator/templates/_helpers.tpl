@@ -88,6 +88,16 @@ true
 {{- end }}
 
 {{/*
+Check if web server replicas should be set.
+Returns "true" when web is enabled, serverOnly mode is set, and serverReplicas is greater than 1.
+*/}}
+{{- define "flux-operator.setWebServerReplicas" -}}
+{{- if and .Values.web.enabled .Values.web.serverOnly (gt (int .Values.web.serverReplicas) 1) -}}
+true
+{{- end -}}
+{{- end }}
+
+{{/*
 Check if web roles should be created.
 Returns "true" when web is enabled and createRoles is enabled.
 */}}
