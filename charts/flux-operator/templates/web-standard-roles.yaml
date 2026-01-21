@@ -49,3 +49,27 @@ rules:
       - suspend
       - resume
 {{- end }}
+{{- if include "flux-operator.createWebRolesAggregation" . }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: flux-web-edit
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+rules:
+  - apiGroups:
+      - fluxcd.controlplane.io
+      - source.toolkit.fluxcd.io
+      - source.extensions.fluxcd.io
+      - kustomize.toolkit.fluxcd.io
+      - helm.toolkit.fluxcd.io
+      - image.toolkit.fluxcd.io
+      - notification.toolkit.fluxcd.io
+    resources:
+      - '*'
+    verbs:
+      - reconcile
+      - suspend
+      - resume
+{{- end }}

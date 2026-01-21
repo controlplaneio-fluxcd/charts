@@ -516,6 +516,10 @@
                 "rbac": {
                     "type": "object",
                     "properties": {
+                        "createAggregation": {
+                            "default": false,
+                            "type": "boolean"
+                        },
                         "createRoles": {
                             "default": true,
                             "type": "boolean"
