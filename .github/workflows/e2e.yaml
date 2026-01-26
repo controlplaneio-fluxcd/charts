@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
       - name: Setup Helm
         uses: azure/setup-helm@v4.3.1
       - name: Setup Flux Operator CLI
-        uses: controlplaneio-fluxcd/flux-operator/actions/setup@v0.38.1
+        uses: controlplaneio-fluxcd/flux-operator/actions/setup@v0.40.0
       - name: Setup Kubernetes Kind
         uses: helm/kind-action@v1.13.0
       - name: Install latest stable

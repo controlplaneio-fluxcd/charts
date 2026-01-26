@@ -22,7 +22,7 @@ jobs:
       packages: write # for pushing and signing container images.
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
       - name: Setup Helm
         uses: azure/setup-helm@v4.3.1
       - name: Setup Cosign
@@ -50,7 +50,7 @@ jobs:
       packages: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
       - name: Setup Flux CLI
         uses: fluxcd/flux2/action@main
       - name: Setup Crane CLI

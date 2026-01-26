@@ -13,7 +13,7 @@ jobs:
       packages: write # for pushing helm chart artifacts.
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
       - name: Setup charts-syncer
         uses: ./actions/charts-syncer
       - name: Sync charts
