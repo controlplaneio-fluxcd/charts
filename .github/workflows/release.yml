@@ -30,7 +30,7 @@ jobs:
         with:
           cosign-release: v2.6.1 # TODO: remove after Flux 2.8 with support for cosign v3
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3.6.0
+        uses: docker/login-action@v3.7.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -60,13 +60,13 @@ jobs:
         with:
           cosign-release: v2.6.1 # TODO: remove after Flux 2.8 with support for cosign v3
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3.6.0
+        uses: docker/login-action@v3.7.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Login to Quay
-        uses: docker/login-action@v3.6.0
+        uses: docker/login-action@v3.7.0
         with:
           registry: quay.io
           username: "fluxoperatordev+bot"
