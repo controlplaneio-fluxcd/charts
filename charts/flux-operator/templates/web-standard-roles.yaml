@@ -49,6 +49,29 @@ rules:
       - suspend
       - resume
       - download
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - statefulsets
+      - daemonsets
+    verbs:
+      - patch
+      - restart
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - create
+      - restart
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - delete
 {{- end }}
 {{- if include "flux-operator.createWebRolesAggregation" . }}
 ---
@@ -82,4 +105,27 @@ rules:
       - suspend
       - resume
       - download
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - statefulsets
+      - daemonsets
+    verbs:
+      - patch
+      - restart
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - create
+      - restart
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - delete
 {{- end }}
