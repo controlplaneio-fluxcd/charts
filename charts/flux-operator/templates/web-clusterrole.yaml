@@ -17,6 +17,9 @@ rules:
     resources: ["*"]
     verbs: ["get", "list", "watch"]
   - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create"]
+  - apiGroups: [""]
     resources: ["users", "groups"]
     verbs: ["impersonate"]
 ---
