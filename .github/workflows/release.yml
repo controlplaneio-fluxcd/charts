@@ -54,7 +54,7 @@ jobs:
       - name: Setup Flux CLI
         uses: fluxcd/flux2/action@main
       - name: Setup Crane CLI
-        uses: imjasonh/setup-crane@v0.4
+        uses: imjasonh/setup-crane@v0.5
       - name: Setup Cosign
         uses: sigstore/cosign-installer@v4.0.0
         with:
