@@ -18,7 +18,7 @@ jobs:
       - name: Setup Flux Operator CLI
         uses: controlplaneio-fluxcd/flux-operator/actions/setup@v0.41.1
       - name: Setup Kubernetes Kind
-        uses: helm/kind-action@v1.13.0
+        uses: helm/kind-action@v1.14.0
       - name: Install latest stable
         run: |
           helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
