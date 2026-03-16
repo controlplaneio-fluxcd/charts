@@ -26,7 +26,7 @@ jobs:
       - name: Setup Helm
         uses: azure/setup-helm@v4.3.1
       - name: Setup Cosign
-        uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
+        uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
         with:
           cosign-release: v2.6.1 # TODO: remove after Flux 2.8 with support for cosign v3
       - name: Login to GitHub Container Registry
@@ -56,7 +56,7 @@ jobs:
       - name: Setup Crane CLI
         uses: imjasonh/setup-crane@v0.5
       - name: Setup Cosign
-        uses: sigstore/cosign-installer@v4.0.0
+        uses: sigstore/cosign-installer@v4.1.0
         with:
           cosign-release: v2.6.1 # TODO: remove after Flux 2.8 with support for cosign v3
       - name: Login to GitHub Container Registry
