@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup Helm
-        uses: azure/setup-helm@v4.3.1
+        uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4.3.1
       - name: Setup Flux Operator CLI
-        uses: controlplaneio-fluxcd/flux-operator/actions/setup@v0.44.0
+        uses: controlplaneio-fluxcd/flux-operator/actions/setup@7d52592122edc52715fe6b2fe502d05c0d166149 # v0.44.0
       - name: Setup Kubernetes Kind
-        uses: helm/kind-action@v1.14.0
+        uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
       - name: Install latest stable
         run: |
           helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
