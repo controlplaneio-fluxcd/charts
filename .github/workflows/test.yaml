@@ -14,15 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup yq
         uses: fluxcd/pkg/actions/yq@main
       - name: Setup kubeconform
         uses: fluxcd/pkg/actions/kubeconform@main
       - name: Setup Helm
-        uses: azure/setup-helm@v4.3.1
+        uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4.3.1
       - name: Setup Helm Docs
-        uses: gabe565/setup-helm-docs-action@v1
+        uses: gabe565/setup-helm-docs-action@d5c35bdc9133cfbea3b671acadf50a29029e87c2 # v1.0.4
       - run: make plugins manifests lint
       - name: Check if working tree is dirty
         run: |
