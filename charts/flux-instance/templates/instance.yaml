@@ -14,7 +14,7 @@ metadata:
   {{- end }}
 spec:
   distribution:
-    version: {{ .Values.instance.distribution.version }}
+    version: {{ .Values.instance.distribution.version | quote }}
     registry: {{ .Values.instance.distribution.registry }}
     artifact: {{ .Values.instance.distribution.artifact }}
     {{- if .Values.instance.distribution.artifactPullSecret }}
