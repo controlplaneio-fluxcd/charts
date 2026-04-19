@@ -23,7 +23,6 @@ as OCI artifacts to the following registries:
 
 - `ghcr.io/controlplaneio-fluxcd/charts/metrics-server`
 - `ghcr.io/controlplaneio-fluxcd/charts/external-dns`
-- `ghcr.io/controlplaneio-fluxcd/charts/ingress-nginx`
 - `ghcr.io/controlplaneio-fluxcd/charts/dex`
 
 The vendored charts are [synced](.github/workflows/vendor.yaml) from
