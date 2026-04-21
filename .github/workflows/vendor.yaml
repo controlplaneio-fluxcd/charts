@@ -24,6 +24,5 @@ jobs:
           TARGET_CONTAINERS_AUTH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           charts-syncer sync --latest-version-only --config=sync/metrics-server.yaml
-          charts-syncer sync --latest-version-only --config=sync/ingress-nginx.yaml
           charts-syncer sync --latest-version-only --config=sync/external-dns.yaml
           charts-syncer sync --latest-version-only --config=sync/dex.yaml
