@@ -98,6 +98,7 @@ For more information, please refer to the [Flux MCP Server documentation](https:
 | readonly | bool | `false` | Run the server in readonly mode by disabling the MCP tools that can modify the cluster state. |
 | resources | object | `{"limits":{"cpu":"1000m","memory":"1Gi"},"requests":{"cpu":"10m","memory":"64Mi"}}` | Container resources requests and limits settings. |
 | securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | Container security context settings. The default is compliant with the pod security restricted profile. |
+| service.ipFamilyPolicy | string | `""` | Sets the IP family policy on all Service resources. Uses Kubernetes defaults if unset |
 | serviceAccount | object | `{"automount":true,"create":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | tolerations | list | `[]` | Pod tolerations settings. |
 | transport | string | `"sse"` | MCP server transport. Either 'sse' for server-sent events, or 'http' for streamable HTTP. |
