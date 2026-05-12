@@ -15,12 +15,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Setup yq
-        uses: fluxcd/pkg/actions/yq@main
-      - name: Setup kubectl
-        uses: fluxcd/pkg/actions/kubectl@main
-      - name: Setup kubeconform
-        uses: fluxcd/pkg/actions/kubeconform@main
+      - name: Setup Flux CLI
+        uses: fluxcd/flux2/action@04acaec6161ac4fb1a82ffafa88901c03271d34f # v2.8.6
+      - name: Setup Flux Schema CLI
+        uses: fluxcd/flux-schema/actions/setup@c90d3f83707614d21c20226183a9e714d8ba9626 # v0.3.0
       - name: Setup Helm
         uses: azure/setup-helm@dda3372f752e03dde6b3237bc9431cdc2f7a02a2 # v5.0.0
       - name: Setup Helm Docs
