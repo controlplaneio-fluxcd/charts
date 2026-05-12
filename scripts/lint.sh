@@ -20,6 +20,6 @@ for pkg in ${REPOSITORY_ROOT}/charts/*; do
     break
   fi
   chartName=${pkg##*/}
-  info "Running helm template and kubeconform for ${chartName}"
-  helm template ${chartName} --include-crds ${pkg} | kubeconform -strict -ignore-missing-schemas -verbose
+  info "Running helm template and flux-schema for ${chartName}"
+  helm template ${chartName} --include-crds ${pkg} | flux-schema validate --verbose
 done
