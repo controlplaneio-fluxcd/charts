@@ -1,5 +1,10 @@
 # Makefile for building, testing, and publishing the ControlPlane Helm Charts.
 
+# Prerequisites
+# - brew install flux kubectl yq helm helm-docs
+# - go install github.com/fluxcd/flux-schema/cmd/flux-schema@latest
+# - helm plugin install https://github.com/losisin/helm-values-schema-json.git --verify=false
+
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
 
