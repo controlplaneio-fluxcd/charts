@@ -75,6 +75,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | reporting | object | `{"interval":"5m"}` | Flux [reporting](https://fluxoperator.dev/docs/crd/fluxreport/) settings. |
 | resources | object | `{"limits":{"cpu":"2000m","memory":"1Gi"},"requests":{"cpu":"100m","memory":"64Mi"}}` | Container resources requests and limits settings. |
 | securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | Container security context settings. The default is compliant with the pod security restricted profile. |
+| service.ipFamilyPolicy | string | `""` | Sets the IP family policy on all Service resources. Uses Kubernetes defaults if unset |
 | serviceAccount | object | `{"automount":true,"create":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | serviceMonitor | object | `{"create":false,"interval":"60s","labels":{},"scrapeTimeout":"30s"}` | Prometheus Operator scraping settings. |
 | tolerations | list | `[]` | Pod tolerations settings. |

@@ -131,3 +131,7 @@ httpRoute: # @schema default: {"enabled":false,"annotations":{},"parentRefs":[],
   #   sectionName: https
   hostnames: [ ] # @schema item: string ; uniqueItems: true
   # - flux-operator-mcp.example.com
+
+service:
+  # -- Sets the IP family policy on all Service resources. Uses Kubernetes defaults if unset
+  ipFamilyPolicy: '' # @schema type: string; enum:['', SingleStack, PreferDualStack, RequireDualStack]
