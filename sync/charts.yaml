@@ -1,0 +1,15 @@
+apiVersion: mirror.fluxcd.io/v1alpha1
+kind: Config
+charts:
+  - name: metrics-server
+    source: https://kubernetes-sigs.github.io/metrics-server
+    destination: oci://ghcr.io/controlplaneio-fluxcd/charts
+    limit: 1
+  - name: external-dns
+    source: https://kubernetes-sigs.github.io/external-dns
+    destination: oci://ghcr.io/controlplaneio-fluxcd/charts
+    limit: 1
+  - name: dex
+    source: https://charts.dexidp.io
+    destination: oci://ghcr.io/controlplaneio-fluxcd/charts
+    limit: 1
