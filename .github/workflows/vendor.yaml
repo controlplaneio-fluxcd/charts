@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup Flux Mirror CLI
-        uses: fluxcd/flux-mirror/actions/setup@c5d300b42f30dac8091869763c049299b260805e # v0.0.1
+        uses: fluxcd/flux-mirror/actions/setup@5d628dcaf2c7be6b606d3a13c11a00c92411434a # v0.1.0
       - name: Login to GHCR
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
         with:
@@ -23,4 +23,4 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Sync charts
-        run: flux-mirror sync -c sync/charts.yaml --no-progress
+        run: flux-mirror sync sync/charts.yaml --no-progress
