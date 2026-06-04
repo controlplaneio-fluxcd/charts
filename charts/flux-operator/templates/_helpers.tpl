@@ -116,3 +116,18 @@ Returns "true" when web is enabled and createAggregation is enabled.
 true
 {{- end -}}
 {{- end }}
+
+{{/*
+Validate the web user actions access mode and report whether fine-grained access is enabled.
+Fails when web.userActions.access is set to an unsupported value.
+Returns "true" when web.userActions.access is set to "FineGrained".
+*/}}
+{{- define "flux-operator.webFineGrained" -}}
+{{- $access := dig "userActions" "access" "Impersonated" .Values.web -}}
+{{- if not (has $access (list "Impersonated" "FineGrained")) -}}
+{{- fail (printf "Invalid web.userActions.access value %q, must be one of: Impersonated, FineGrained" $access) -}}
+{{- end -}}
+{{- if eq $access "FineGrained" -}}
+true
+{{- end -}}
+{{- end }}

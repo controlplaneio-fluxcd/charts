@@ -88,6 +88,8 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | web.rbac | object | `{"createAggregation":false,"createRoles":true}` | Create standard roles for [user access management](https://fluxoperator.dev/docs/web-ui/user-management/). |
 | web.serverOnly | bool | `false` | Run the Flux Status web server as a standalone deployment (requires a dedicated Helm release). |
 | web.serverReplicas | int | `1` | Number of replicas for the Flux Status web server standalone deployment (only applicable if `web.serverOnly` is `true`). |
+| web.userActions | object | `{"access":"Impersonated"}` | GitOps actions configuration for the web UI. |
+| web.userActions.access | string | `"Impersonated"` | Access mode for GitOps actions. When set to `FineGrained`, actions are performed using the web server's own privileges instead of impersonating the user, and the web ClusterRole is extended with the native Kubernetes permissions required by the actions (only effective in `web.serverOnly` mode; otherwise the operator already runs as cluster-admin). Either `Impersonated` (default) or `FineGrained`. |
 
 ## Source Code
 
