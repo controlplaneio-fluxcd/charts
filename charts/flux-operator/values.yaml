@@ -21,6 +21,10 @@ web:
   config: { } # @schema type: object
   # -- Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`.
   configSecretName: "" # @schema default: ""
+  # -- GitOps actions configuration for the web UI.
+  userActions:
+    # -- Access mode for GitOps actions. When set to `FineGrained`, actions are performed using the web server's own privileges instead of impersonating the user, and the web ClusterRole is extended with the native Kubernetes permissions required by the actions (only effective in `web.serverOnly` mode; otherwise the operator already runs as cluster-admin). Either `Impersonated` (default) or `FineGrained`.
+    access: Impersonated # @schema enum:["Impersonated", "FineGrained"]; default: "Impersonated"
   # -- Create a NetworkPolicy to allow access to the Flux Status web interface.
   networkPolicy:
     create: true

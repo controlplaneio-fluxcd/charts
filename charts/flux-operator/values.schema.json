@@ -546,6 +546,19 @@
                 "serverReplicas": {
                     "default": 1,
                     "type": "integer"
+                },
+                "userActions": {
+                    "type": "object",
+                    "properties": {
+                        "access": {
+                            "default": "Impersonated",
+                            "type": "string",
+                            "enum": [
+                                "Impersonated",
+                                "FineGrained"
+                            ]
+                        }
+                    }
                 }
             }
         }
