@@ -1,6 +1,6 @@
 apiVersion: v2
-version: 0.50.0
-appVersion: "v0.50.0"
+version: 0.51.0
+appVersion: "v0.51.0"
 kubeVersion: ">=1.22.0-0"
 type: application
 name: flux-operator
