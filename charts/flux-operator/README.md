@@ -78,6 +78,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | service.ipFamilyPolicy | string | `""` | Sets the IP family policy on all Service resources. Uses Kubernetes defaults if unset |
 | serviceAccount | object | `{"automount":true,"create":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | serviceMonitor | object | `{"create":false,"interval":"60s","labels":{},"scrapeTimeout":"30s"}` | Prometheus Operator scraping settings. |
+| strategy | object | `{}` | Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock. |
 | tolerations | list | `[]` | Pod tolerations settings. |
 | web.config | object | `{}` | The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/) |
 | web.configSecretName | string | `""` | Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`. |

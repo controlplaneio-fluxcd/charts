@@ -162,6 +162,9 @@ tolerations: [ ] # @schema item: object ; uniqueItems: true
 # -- Pod Node Selector settings.
 nodeSelector: { } # @schema type: object
 
+# -- Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock.
+strategy: { } # @schema type: object
+
 # -- If `true`, the container ports (`8080` and `8081`) are exposed on the host network.
 hostNetwork: false # @schema default: false
 
