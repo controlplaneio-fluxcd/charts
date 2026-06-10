@@ -433,6 +433,9 @@
                 }
             }
         },
+        "strategy": {
+            "type": "object"
+        },
         "tolerations": {
             "type": "array",
             "uniqueItems": true,
