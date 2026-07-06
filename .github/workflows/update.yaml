@@ -16,9 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Setup Flux CLI
-        uses: fluxcd/flux2/action@1fd61a06264d71cf445ed55c4f14d401d26a1c64 # v2.8.8
+        uses: fluxcd/flux2/action@dcc7def046cba2fe8d15d9737a4c250100f62fe0 # v2.9.0
       - name: Setup Flux Schema CLI
-        uses: fluxcd/flux-schema/actions/setup@aa86d0ac25d21f7312366272ea79e50d475be9e8 # v0.5.0
+        uses: fluxcd/flux-schema/actions/setup@57f8dc73de6e689cd661a55a74ca94542843480a # v0.7.2
       - name: Setup Helm
         uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5.0.1
       - name: Setup Helm Docs
