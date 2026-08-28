@@ -3,8 +3,8 @@
 nameOverride: ""
 fullnameOverride: ""
 
-# -- MCP server transport. Either 'sse' for server-sent events, or 'http' for streamable HTTP.
-transport: sse # @schema enum:[sse, http]
+# -- MCP server transport. Only the streamable HTTP transport is supported.
+transport: http # @schema enum:[http]
 
 # -- Run the server in readonly mode by disabling the MCP tools that can modify the cluster state.
 readonly: false # @schema default: false

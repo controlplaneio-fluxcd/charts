@@ -39,23 +39,8 @@ To connect to the server, start port forwarding with:
 kubectl port-forward -n flux-system svc/flux-operator-mcp 9090:9090
 ```
 
-Add the following configuration to your AI assistant to connect to the MCP Server:
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "flux-operator-mcp": {
-        "type": "sse",
-        "url": "http://localhost:9090/sse"
-      }
-    }
-  }
-}
-```
-
-For the streamable HTTP transport, set the Helm value `transport` to `http`
-(defaults to `sse`) and use the following AI assistant configuration:
+Add the following configuration to your AI assistant to connect to the MCP Server
+over the streamable HTTP transport:
 
 ```json
 {
@@ -70,7 +55,13 @@ For the streamable HTTP transport, set the Helm value `transport` to `http`
 }
 ```
 
-For more information, please refer to the [Flux MCP Server documentation](https://fluxoperator.dev/docs/mcp/install/).
+The server runs in stateless mode as defined by the MCP specification `2026-07-28`,
+so it can be scaled horizontally behind a load balancer without sticky sessions.
+Clients using older versions of the MCP specification are supported through
+protocol version negotiation. The legacy server-sent events (`sse`) transport
+has been removed, clients connecting over `sse` must switch to streamable HTTP.
+
+For more information, please refer to the [Flux MCP Server documentation](https://fluxoperator.dev/docs/mcp/config/#deploy-on-kubernetes).
 
 {{ template "chart.valuesSection" . }}
 
