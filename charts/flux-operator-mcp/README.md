@@ -40,23 +40,8 @@ To connect to the server, start port forwarding with:
 kubectl port-forward -n flux-system svc/flux-operator-mcp 9090:9090
 ```
 
-Add the following configuration to your AI assistant to connect to the MCP Server:
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "flux-operator-mcp": {
-        "type": "sse",
-        "url": "http://localhost:9090/sse"
-      }
-    }
-  }
-}
-```
-
-For the streamable HTTP transport, set the Helm value `transport` to `http`
-(defaults to `sse`) and use the following AI assistant configuration:
+Add the following configuration to your AI assistant to connect to the MCP Server
+over the streamable HTTP transport:
 
 ```json
 {
@@ -71,7 +56,13 @@ For the streamable HTTP transport, set the Helm value `transport` to `http`
 }
 ```
 
-For more information, please refer to the [Flux MCP Server documentation](https://fluxoperator.dev/docs/mcp/install/).
+The server runs in stateless mode as defined by the MCP specification `2026-07-28`,
+so it can be scaled horizontally behind a load balancer without sticky sessions.
+Clients using older versions of the MCP specification are supported through
+protocol version negotiation. The legacy server-sent events (`sse`) transport
+has been removed, clients connecting over `sse` must switch to streamable HTTP.
+
+For more information, please refer to the [Flux MCP Server documentation](https://fluxoperator.dev/docs/mcp/config/#deploy-on-kubernetes).
 
 ## Values
 
@@ -101,7 +92,7 @@ For more information, please refer to the [Flux MCP Server documentation](https:
 | service.ipFamilyPolicy | string | `""` | Sets the IP family policy on all Service resources. Uses Kubernetes defaults if unset |
 | serviceAccount | object | `{"automount":true,"create":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | tolerations | list | `[]` | Pod tolerations settings. |
-| transport | string | `"sse"` | MCP server transport. Either 'sse' for server-sent events, or 'http' for streamable HTTP. |
+| transport | string | `"http"` | MCP server transport. Only the streamable HTTP transport is supported. |
 
 ## Source Code
 

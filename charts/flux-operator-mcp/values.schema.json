@@ -394,7 +394,6 @@
         "transport": {
             "type": "string",
             "enum": [
-                "sse",
                 "http"
             ]
         }
