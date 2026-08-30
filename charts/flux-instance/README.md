@@ -46,7 +46,8 @@ helm -n flux-system uninstall flux
 | instance.kustomize.patches | list | `[]` | Kustomize patches https://fluxoperator.dev/docs/crd/fluxinstance/#kustomize-patches |
 | instance.sharding | object | `{"key":"sharding.fluxcd.io/key","shards":[]}` | Sharding https://fluxoperator.dev/docs/crd/fluxinstance/#sharding-configuration |
 | instance.storage | object | `{"class":"","size":""}` | Storage https://fluxoperator.dev/docs/crd/fluxinstance/#storage-configuration |
-| instance.sync | object | `{"interval":"1m","kind":"GitRepository","name":"","path":"","provider":"","pullSecret":"","ref":"","url":""}` | Sync https://fluxoperator.dev/docs/crd/fluxinstance/#sync-configuration |
+| instance.sync | object | `{"interval":"1m","kind":"GitRepository","name":"","path":"","provider":"","pullSecret":"","pullSecretStringData":{},"ref":"","url":""}` | Sync https://fluxoperator.dev/docs/crd/fluxinstance/#sync-configuration |
+| instance.sync.pullSecretStringData | object | `{}` | Creates secret and sets it as pullSecret |
 | nameOverride | string | `""` |  |
 
 ## Source Code
