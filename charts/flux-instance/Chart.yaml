@@ -1,6 +1,6 @@
 apiVersion: v2
-version: 0.58.1
-appVersion: "v0.58.1"
+version: 0.59.0
+appVersion: "v0.59.0"
 kubeVersion: ">=1.22.0-0"
 type: application
 name: flux-instance
