@@ -70,7 +70,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | podSecurityContext | object | `{}` | Pod security context settings. |
 | priorityClassName | string | `""` | Pod priority class name. Recommended value is system-cluster-critical. |
 | rbac.create | bool | `true` | Grant the cluster-admin role to the flux-operator service account (required for the Flux Instance deployment). |
-| rbac.createAggregation | bool | `true` | Grant the Kubernetes view, edit and admin roles access to ResourceSet APIs. |
+| rbac.createAggregation | bool | `true` | Grant the Kubernetes view, edit and admin roles access to the Flux Operator APIs (FluxInstance and FluxReport are read-only). |
 | readinessProbe | object | `{"httpGet":{"path":"/readyz","port":8081},"initialDelaySeconds":5,"periodSeconds":10}` | Container readiness probe settings. |
 | reporting | object | `{"interval":"5m"}` | Flux [reporting](https://fluxoperator.dev/docs/crd/fluxreport/) settings. |
 | resources | object | `{"limits":{"cpu":"2000m","memory":"1Gi"},"requests":{"cpu":"100m","memory":"64Mi"}}` | Container resources requests and limits settings. |

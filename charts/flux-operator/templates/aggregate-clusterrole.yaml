@@ -49,6 +49,8 @@ rules:
     resources:
       - resourcesets
       - resourcesetinputproviders
+      - fluxinstances
+      - fluxreports
     verbs:
       - get
       - list
