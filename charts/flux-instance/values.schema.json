@@ -427,6 +427,10 @@
                         "pullSecret": {
                             "type": "string"
                         },
+                        "pullSecretStringData": {
+                            "type": "object",
+                            "properties": {}
+                        },
                         "ref": {
                             "type": "string"
                         },
