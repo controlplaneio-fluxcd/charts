@@ -38,6 +38,8 @@ instance:
   sharding: # @schema required: false
     key: "sharding.fluxcd.io/key"
     shards: [ ] # @schema item: string
+  # -- SPIFFE https://fluxoperator.dev/docs/crd/fluxinstance/#spiffe-configuration
+  spiffe: { } # @schema type: object; required: false
   # -- Sync https://fluxoperator.dev/docs/crd/fluxinstance/#sync-configuration
   sync: # @schema required: false
     interval: 1m
