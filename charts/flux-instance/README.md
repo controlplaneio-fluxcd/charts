@@ -45,6 +45,7 @@ helm -n flux-system uninstall flux
 | instance.distribution | object | `{"artifact":"oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:latest","artifactPullSecret":"","imagePullSecret":"","registry":"ghcr.io/fluxcd","variant":"","version":"2.x"}` | Distribution https://fluxoperator.dev/docs/crd/fluxinstance/#distribution-configuration |
 | instance.kustomize.patches | list | `[]` | Kustomize patches https://fluxoperator.dev/docs/crd/fluxinstance/#kustomize-patches |
 | instance.sharding | object | `{"key":"sharding.fluxcd.io/key","shards":[]}` | Sharding https://fluxoperator.dev/docs/crd/fluxinstance/#sharding-configuration |
+| instance.spiffe | object | `{}` | SPIFFE https://fluxoperator.dev/docs/crd/fluxinstance/#spiffe-configuration |
 | instance.storage | object | `{"class":"","size":""}` | Storage https://fluxoperator.dev/docs/crd/fluxinstance/#storage-configuration |
 | instance.sync | object | `{"interval":"1m","kind":"GitRepository","name":"","path":"","provider":"","pullSecret":"","ref":"","url":""}` | Sync https://fluxoperator.dev/docs/crd/fluxinstance/#sync-configuration |
 | nameOverride | string | `""` |  |
