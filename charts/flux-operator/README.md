@@ -79,13 +79,13 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | serviceAccount | object | `{"automount":true,"create":true,"name":""}` | Pod service account settings. The name of the service account defaults to the release name. |
 | serviceMonitor | object | `{"create":false,"interval":"60s","labels":{},"scrapeTimeout":"30s"}` | Prometheus Operator scraping settings. |
 | spiffe | object | `{"brokerAPI":{"endpoint":"","ids":[]},"workloadAPI":{"csiDriver":"","endpoint":""}}` | SPIFFE settings for the flux-operator pod. |
-| spiffe.brokerAPI.endpoint | string | `""` | The SPIFFE Broker API endpoint. Sets the `--spiffe-broker-endpoint` flag. |
+| spiffe.brokerAPI.endpoint | string | `""` | The SPIFFE Broker API endpoint. Sets the `--spiffe-broker-endpoint` flag. Requires `spiffe.workloadAPI.endpoint` and `spiffe.brokerAPI.ids`. |
 | spiffe.brokerAPI.ids | list | `[]` | SPIFFE IDs or prefixes of the Broker API endpoint. Sets the repeatable `--spiffe-broker-id` flag. |
-| spiffe.workloadAPI.csiDriver | string | `""` | The SPIFFE CSI driver name used to mount the Workload API socket. |
+| spiffe.workloadAPI.csiDriver | string | `""` | The SPIFFE CSI driver name used to mount the Workload API socket at `/spiffe-workload-api`. When set, the endpoint must be a socket under that path, e.g. `unix:///spiffe-workload-api/spire-agent.sock`. |
 | spiffe.workloadAPI.endpoint | string | `""` | The SPIFFE Workload API endpoint. Sets the `SPIFFE_ENDPOINT_SOCKET` environment variable. |
 | strategy | object | `{}` | Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock. |
 | tolerations | list | `[]` | Pod tolerations settings. |
-| web.authorizedClientSPIFFEIDs | list | `[]` | SPIFFE IDs or prefixes of authorized web UI clients. Requires `spiffe.workloadAPI.endpoint`. |
+| web.authorizedClientSPIFFEIDs | list | `[]` | SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on port 9080 accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`. |
 | web.config | object | `{}` | The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/) |
 | web.configSecretName | string | `""` | Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`. |
 | web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080. |

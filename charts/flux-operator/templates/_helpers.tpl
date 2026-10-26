@@ -131,3 +131,27 @@ Returns "true" when web.userActions.access is set to "FineGrained".
 true
 {{- end -}}
 {{- end }}
+
+{{/*
+Fails when the SPIFFE settings are incomplete or inconsistent.
+*/}}
+{{- define "flux-operator.validateSPIFFE" -}}
+{{- $workloadAPI := .Values.spiffe.workloadAPI -}}
+{{- $brokerAPI := .Values.spiffe.brokerAPI -}}
+{{- if and .Values.web.authorizedClientSPIFFEIDs (not $workloadAPI.endpoint) -}}
+{{- fail "Invalid values: 'web.authorizedClientSPIFFEIDs' requires 'spiffe.workloadAPI.endpoint'." -}}
+{{- end -}}
+{{- if or $brokerAPI.endpoint $brokerAPI.ids -}}
+{{- if not (and $brokerAPI.endpoint $brokerAPI.ids) -}}
+{{- fail "Invalid values: 'spiffe.brokerAPI.endpoint' and 'spiffe.brokerAPI.ids' must be set together." -}}
+{{- end -}}
+{{- if not $workloadAPI.endpoint -}}
+{{- fail "Invalid values: 'spiffe.brokerAPI' requires 'spiffe.workloadAPI.endpoint'." -}}
+{{- end -}}
+{{- end -}}
+{{- if $workloadAPI.csiDriver -}}
+{{- if or (not (regexMatch "^unix:(///|/)spiffe-workload-api/." ($workloadAPI.endpoint | toString))) (regexMatch "(^|/)\\.\\.(/|$)" ($workloadAPI.endpoint | toString)) -}}
+{{- fail "Invalid values: 'spiffe.workloadAPI.endpoint' must be a socket under /spiffe-workload-api/ when 'spiffe.workloadAPI.csiDriver' is set, e.g. 'unix:///spiffe-workload-api/spire-agent.sock'." -}}
+{{- end -}}
+{{- end -}}
+{{- end }}

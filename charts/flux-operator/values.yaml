@@ -21,7 +21,7 @@ web:
   config: { } # @schema type: object
   # -- Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`.
   configSecretName: "" # @schema default: ""
-  # -- SPIFFE IDs or prefixes of authorized web UI clients. Requires `spiffe.workloadAPI.endpoint`.
+  # -- SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on port 9080 accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`.
   authorizedClientSPIFFEIDs: [ ] # @schema item: string ; uniqueItems: true
   # -- GitOps actions configuration for the web UI.
   userActions:
@@ -201,10 +201,10 @@ spiffe:
   workloadAPI:
     # -- The SPIFFE Workload API endpoint. Sets the `SPIFFE_ENDPOINT_SOCKET` environment variable.
     endpoint: ""
-    # -- The SPIFFE CSI driver name used to mount the Workload API socket.
+    # -- The SPIFFE CSI driver name used to mount the Workload API socket at `/spiffe-workload-api`. When set, the endpoint must be a socket under that path, e.g. `unix:///spiffe-workload-api/spire-agent.sock`.
     csiDriver: ""
   brokerAPI:
-    # -- The SPIFFE Broker API endpoint. Sets the `--spiffe-broker-endpoint` flag.
+    # -- The SPIFFE Broker API endpoint. Sets the `--spiffe-broker-endpoint` flag. Requires `spiffe.workloadAPI.endpoint` and `spiffe.brokerAPI.ids`.
     endpoint: ""
     # -- SPIFFE IDs or prefixes of the Broker API endpoint. Sets the repeatable `--spiffe-broker-id` flag.
     ids: [ ] # @schema item: string ; uniqueItems: true
