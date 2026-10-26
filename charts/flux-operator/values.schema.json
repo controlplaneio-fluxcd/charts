@@ -433,6 +433,37 @@
                 }
             }
         },
+        "spiffe": {
+            "type": "object",
+            "properties": {
+                "brokerAPI": {
+                    "type": "object",
+                    "properties": {
+                        "endpoint": {
+                            "type": "string"
+                        },
+                        "ids": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "workloadAPI": {
+                    "type": "object",
+                    "properties": {
+                        "csiDriver": {
+                            "type": "string"
+                        },
+                        "endpoint": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "strategy": {
             "type": "object"
         },
@@ -446,6 +477,13 @@
         "web": {
             "type": "object",
             "properties": {
+                "authorizedClientSPIFFEIDs": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "config": {
                     "type": "object"
                 },

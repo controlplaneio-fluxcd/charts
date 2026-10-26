@@ -75,6 +75,15 @@ spec:
             {{- if include "flux-operator.useWebConfigSecret" . }}
             - --web-config-secret-name={{ .Values.web.configSecretName }}
             {{- end }}
+            {{- with .Values.spiffe.brokerAPI.endpoint }}
+            - --spiffe-broker-endpoint={{ . }}
+            {{- end }}
+            {{- range .Values.spiffe.brokerAPI.ids }}
+            - --spiffe-broker-id={{ . }}
+            {{- end }}
+            {{- range .Values.web.authorizedClientSPIFFEIDs }}
+            - --authorized-web-ui-client-spiffe-id={{ . }}
+            {{- end }}
             {{- range .Values.extraArgs }}
             - {{ . }}
             {{- end }}
@@ -87,6 +96,10 @@ spec:
               value: {{ .Values.reporting.interval }}
             - name: WEB_SERVER_PORT
               value: "{{ ternary "9080" "0" .Values.web.enabled }}"
+            {{- with .Values.spiffe.workloadAPI.endpoint }}
+            - name: SPIFFE_ENDPOINT_SOCKET
+              value: {{ . | quote }}
+            {{- end }}
             {{- with .Values.marketplace.type }}
             - name: MARKETPLACE_TYPE
               value: {{ . }}
@@ -132,6 +145,11 @@ spec:
               mountPath: /etc/flux-operator/web
               readOnly: true
           {{- end }}
+          {{- if .Values.spiffe.workloadAPI.csiDriver }}
+            - name: spiffe-workload-api
+              mountPath: /spiffe-workload-api
+              readOnly: true
+          {{- end }}
             {{- if .Values.extraVolumeMounts }}
               {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
@@ -142,6 +160,12 @@ spec:
         - name: web-config
           secret:
             secretName: {{ include "flux-operator.fullname" . }}-web-config
+      {{- end }}
+      {{- if .Values.spiffe.workloadAPI.csiDriver }}
+        - name: spiffe-workload-api
+          csi:
+            driver: {{ .Values.spiffe.workloadAPI.csiDriver | quote }}
+            readOnly: true
       {{- end }}
         {{- if .Values.extraVolumes }}
           {{- toYaml .Values.extraVolumes | nindent 8 }}
