@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup Flux Mirror CLI
-        uses: fluxcd/flux-mirror/actions/setup@acc42232aeeccdf522cc733b97678bccd505d94b # v0.10.0
+        uses: fluxcd/flux-mirror/actions/setup@a3c72b650e6da9c321ec16b889257187b76bf469 # v0.11.0
       - name: Login to GHCR
         uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
         with:
