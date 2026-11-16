@@ -16,11 +16,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup Flux CLI
-        uses: fluxcd/flux2/action@b9c17924adb533d3617ec7de97a7b0f4acc07b39 # v2.9.6
+        uses: fluxcd/flux2/action@3fa784edd773d56630bb9f62645e08f70c2cff0a # v2.10.0
       - name: Setup Flux Schema CLI
         uses: fluxcd/flux-schema/actions/setup@4c71b2098ba84b738d811877463f5a2b2bfe443f # v0.17.0
       - name: Setup Helm
-        uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5.0.1
+        uses: azure/setup-helm@2f5e7bc67f1f9972ab16657bb795f36d8f04de0e # v5.1.0
       - name: Setup Helm Docs
         uses: gabe565/setup-helm-docs-action@d5c35bdc9133cfbea3b671acadf50a29029e87c2 # v1.0.4
       - run: make plugins manifests lint
