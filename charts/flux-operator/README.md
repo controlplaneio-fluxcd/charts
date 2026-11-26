@@ -58,20 +58,23 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | extraVolumeMounts | list | `[]` | Container extra volume mounts. |
 | extraVolumes | list | `[]` | Pod extra volumes. |
 | fullnameOverride | string | `""` |  |
-| hostNetwork | bool | `false` | If `true`, the container ports (`8080` and `8081`) are exposed on the host network. |
+| hostNetwork | bool | `false` | If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network. |
 | image | object | `{"imagePullPolicy":"IfNotPresent","pullSecrets":[],"repository":"ghcr.io/controlplaneio-fluxcd/flux-operator","tag":""}` | Container image settings. The image tag defaults to the chart appVersion. |
 | installCRDs | bool | `true` | Install and upgrade the custom resource definitions. |
-| livenessProbe | object | `{"httpGet":{"path":"/healthz","port":8081},"initialDelaySeconds":15,"periodSeconds":20}` | Container liveness probe settings. |
+| livenessProbe | object | `{"httpGet":{"path":"/healthz","port":"http"},"initialDelaySeconds":15,"periodSeconds":20}` | Container liveness probe settings. |
 | logLevel | string | `"info"` | Container logging level flag. |
 | marketplace | object | `{"account":"","license":"","type":""}` | Marketplace settings. |
 | multitenancy | object | `{"defaultServiceAccount":"flux-operator","defaultWorkloadIdentityServiceAccount":"flux-operator","enabled":false,"enabledForWorkloadIdentity":false}` | Enable [multitenancy lockdown](https://fluxoperator.dev/docs/crd/resourceset/#role-based-access-control) for the ResourceSet APIs. |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` | Pod Node Selector settings. |
 | podSecurityContext | object | `{}` | Pod security context settings. |
+| ports.health | int | `8081` | Port of the health probes endpoint. Sets the `--health-addr` flag. |
+| ports.metrics | int | `8080` | Port of the metrics endpoint. Sets the `--metrics-addr` flag. |
+| ports.web | int | `9080` | Port of the Flux Status web server. Sets the `WEB_SERVER_PORT` environment variable when `web.enabled` is `true`. |
 | priorityClassName | string | `""` | Pod priority class name. Recommended value is system-cluster-critical. |
 | rbac.create | bool | `true` | Grant the cluster-admin role to the flux-operator service account (required for the Flux Instance deployment). |
 | rbac.createAggregation | bool | `true` | Grant the Kubernetes view, edit and admin roles access to ResourceSet APIs. |
-| readinessProbe | object | `{"httpGet":{"path":"/readyz","port":8081},"initialDelaySeconds":5,"periodSeconds":10}` | Container readiness probe settings. |
+| readinessProbe | object | `{"httpGet":{"path":"/readyz","port":"http"},"initialDelaySeconds":5,"periodSeconds":10}` | Container readiness probe settings. |
 | reporting | object | `{"interval":"5m"}` | Flux [reporting](https://fluxoperator.dev/docs/crd/fluxreport/) settings. |
 | resources | object | `{"limits":{"cpu":"2000m","memory":"1Gi"},"requests":{"cpu":"100m","memory":"64Mi"}}` | Container resources requests and limits settings. |
 | securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | Container security context settings. The default is compliant with the pod security restricted profile. |

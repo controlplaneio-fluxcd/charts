@@ -24,9 +24,9 @@ spec:
         - namespaceSelector: {}
       ports:
         - protocol: TCP
-          port: 9080
+          port: {{ .Values.ports.web }}
         {{- if .Values.serviceMonitor.create }}
         - protocol: TCP
-          port: 8080
+          port: {{ .Values.ports.metrics }}
         {{- end }}
 {{- end }}

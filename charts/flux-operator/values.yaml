@@ -104,18 +104,18 @@ resources: # @schema required: true
     memory: 64Mi
 
 # -- Container liveness probe settings.
-livenessProbe: # @schema default: {"httpGet":{"path":"/healthz","port":8081},"initialDelaySeconds":15,"periodSeconds":20}
+livenessProbe: # @schema default: {"httpGet":{"path":"/healthz","port":"http"},"initialDelaySeconds":15,"periodSeconds":20}
   httpGet:
     path: /healthz
-    port: 8081
+    port: http # @schema type: [string, integer]
   initialDelaySeconds: 15
   periodSeconds: 20
 
 # -- Container readiness probe settings.
-readinessProbe: # @schema default: {"httpGet":{"path":"/readyz","port":8081},"initialDelaySeconds":5,"periodSeconds":10}
+readinessProbe: # @schema default: {"httpGet":{"path":"/readyz","port":"http"},"initialDelaySeconds":5,"periodSeconds":10}
   httpGet:
     path: /readyz
-    port: 8081
+    port: http # @schema type: [string, integer]
   initialDelaySeconds: 5
   periodSeconds: 10
 
@@ -167,7 +167,15 @@ nodeSelector: { } # @schema type: object
 # -- Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock.
 strategy: { } # @schema type: object
 
-# -- If `true`, the container ports (`8080` and `8081`) are exposed on the host network.
+ports:
+  # -- Port of the metrics endpoint. Sets the `--metrics-addr` flag.
+  metrics: 8080 # @schema type: integer; minimum: 1; maximum: 65535; required: true
+  # -- Port of the health probes endpoint. Sets the `--health-addr` flag.
+  health: 8081 # @schema type: integer; minimum: 1; maximum: 65535; required: true
+  # -- Port of the Flux Status web server. Sets the `WEB_SERVER_PORT` environment variable when `web.enabled` is `true`.
+  web: 9080 # @schema type: integer; minimum: 1; maximum: 65535; required: true
+
+# -- If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network.
 hostNetwork: false # @schema default: false
 
 # -- Pod extra volumes.
