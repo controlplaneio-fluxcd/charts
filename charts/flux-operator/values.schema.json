@@ -165,7 +165,7 @@
             "default": {
                 "httpGet": {
                     "path": "/healthz",
-                    "port": 8081
+                    "port": "http"
                 },
                 "initialDelaySeconds": 15,
                 "periodSeconds": 20
@@ -179,7 +179,10 @@
                             "type": "string"
                         },
                         "port": {
-                            "type": "integer"
+                            "type": [
+                                "string",
+                                "integer"
+                            ]
                         }
                     }
                 },
@@ -246,6 +249,31 @@
             },
             "type": "object"
         },
+        "ports": {
+            "type": "object",
+            "required": [
+                "metrics",
+                "health",
+                "web"
+            ],
+            "properties": {
+                "health": {
+                    "type": "integer",
+                    "maximum": 65535,
+                    "minimum": 1
+                },
+                "metrics": {
+                    "type": "integer",
+                    "maximum": 65535,
+                    "minimum": 1
+                },
+                "web": {
+                    "type": "integer",
+                    "maximum": 65535,
+                    "minimum": 1
+                }
+            }
+        },
         "priorityClassName": {
             "default": "system-cluster-critical",
             "type": "string"
@@ -265,7 +293,7 @@
             "default": {
                 "httpGet": {
                     "path": "/readyz",
-                    "port": 8081
+                    "port": "http"
                 },
                 "initialDelaySeconds": 5,
                 "periodSeconds": 10
@@ -279,7 +307,10 @@
                             "type": "string"
                         },
                         "port": {
-                            "type": "integer"
+                            "type": [
+                                "string",
+                                "integer"
+                            ]
                         }
                     }
                 },

@@ -24,7 +24,7 @@ spec:
     matchLabels:
       {{- include "flux-operator.selectorLabels" . | nindent 6 }}
   endpoints:
-    - targetPort: 8080
+    - targetPort: {{ .Values.ports.metrics }}
       path: /metrics
       interval: {{ .Values.serviceMonitor.interval }}
       scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}

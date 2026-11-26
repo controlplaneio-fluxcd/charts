@@ -28,7 +28,7 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
+        prometheus.io/port: "{{ .Values.ports.metrics }}"
         prometheus.io/path: "/metrics"
         {{- if include "flux-operator.createWebConfigSecret" . }}
         checksum/web-config: {{ (include (print $.Template.BasePath "/web-secret.yaml") . | fromYaml).stringData | toYaml | sha256sum }}
@@ -61,6 +61,8 @@ spec:
         - name: manager
           args:
             - --log-level={{ .Values.logLevel }}
+            - --metrics-addr=:{{ .Values.ports.metrics }}
+            - --health-addr=:{{ .Values.ports.health }}
             {{- if .Values.multitenancy.enabled }}
             - --default-service-account={{ .Values.multitenancy.defaultServiceAccount }}
             {{- end }}
@@ -96,7 +98,7 @@ spec:
             - name: REPORTING_INTERVAL
               value: {{ .Values.reporting.interval }}
             - name: WEB_SERVER_PORT
-              value: "{{ ternary "9080" "0" .Values.web.enabled }}"
+              value: "{{ ternary .Values.ports.web 0 .Values.web.enabled }}"
             {{- with .Values.spiffe.workloadAPI.endpoint }}
             - name: SPIFFE_ENDPOINT_SOCKET
               value: {{ . | quote }}
@@ -122,14 +124,14 @@ spec:
           imagePullPolicy: "{{ .Values.image.imagePullPolicy }}"
           ports:
             - name: http-metrics
-              containerPort: 8080
+              containerPort: {{ .Values.ports.metrics }}
               protocol: TCP
             - name: http
-              containerPort: 8081
+              containerPort: {{ .Values.ports.health }}
               protocol: TCP
             {{- if .Values.web.enabled }}
             - name: http-web
-              containerPort: 9080
+              containerPort: {{ .Values.ports.web }}
               protocol: TCP
             {{- end }}
           livenessProbe:
