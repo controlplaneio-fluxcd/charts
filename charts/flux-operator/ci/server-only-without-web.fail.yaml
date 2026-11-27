@@ -1,0 +1,4 @@
+# fail: Invalid values: 'web.serverOnly' requires 'web.enabled'.
+web:
+  enabled: false
+  serverOnly: true
