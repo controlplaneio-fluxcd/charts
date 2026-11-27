@@ -68,7 +68,7 @@ spec:
             - --default-service-account={{ .Values.multitenancy.defaultServiceAccount }}
             {{- end }}
             {{- if .Values.multitenancy.enabledForWorkloadIdentity }}
-            - --default-workload-identity-service-account={{ .Values.multitenancy.defaultWorkloadIdentityServiceAccount }}
+            - --default-object-identity-service-account={{ .Values.multitenancy.defaultWorkloadIdentityServiceAccount }}
             {{- end }}
             {{- if include "flux-operator.webServerOnly" . }}
             - --web-server-only=true
