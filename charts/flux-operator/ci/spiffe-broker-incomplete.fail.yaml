@@ -1,0 +1,6 @@
+# fail: 'spiffe.brokerAPI.endpoint' and 'spiffe.brokerAPI.ids' must be set together
+spiffe:
+  workloadAPI:
+    endpoint: unix:///run/spire/agent.sock
+  brokerAPI:
+    endpoint: unix:///run/spire/broker.sock

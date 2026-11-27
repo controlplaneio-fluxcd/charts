@@ -1,0 +1,4 @@
+# fail: value must be one of 'Impersonated', 'FineGrained'
+web:
+  userActions:
+    access: Everything
