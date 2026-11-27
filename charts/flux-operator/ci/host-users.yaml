@@ -1,0 +1,2 @@
+# Pod in a user namespace.
+hostUsers: false

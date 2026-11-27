@@ -178,6 +178,15 @@ ports:
 # -- If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network. On a single node, or a node selected by `nodeSelector`, set `strategy` to `{"type":"Recreate"}` so a rollout does not wait for host ports the old pod still holds.
 hostNetwork: false # @schema default: false
 
+# -- If `false`, the pod runs in a user namespace, so root in the container is unprivileged on the host. Needs Kubernetes 1.33+ or the `UserNamespacesSupport` feature gate and runtime support, and cannot be combined with `hostNetwork`. Unset leaves the choice to the cluster.
+hostUsers: null # @schema type: [boolean, null]; default: null
+
+# -- If `true`, the kubelet injects environment variables for every Service of the namespace into the pod. The operator reads none of them.
+enableServiceLinks: false # @schema type: boolean; default: false
+
+# -- Size limit of the `/tmp` volume, e.g. `1Gi`. Unset leaves the volume unbounded; the pod is evicted when it exceeds the limit.
+tmpSizeLimit: "" # @schema type: string; default: ""
+
 # -- Pod extra volumes.
 extraVolumes: [ ] # @schema item: object ; uniqueItems: true
 

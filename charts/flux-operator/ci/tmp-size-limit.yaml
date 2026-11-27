@@ -1,0 +1,3 @@
+# Pod hardening values.
+enableServiceLinks: true
+tmpSizeLimit: 1Gi

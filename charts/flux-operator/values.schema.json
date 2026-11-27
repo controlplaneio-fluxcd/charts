@@ -93,6 +93,10 @@
         "commonLabels": {
             "type": "object"
         },
+        "enableServiceLinks": {
+            "default": false,
+            "type": "boolean"
+        },
         "extraArgs": {
             "type": "array",
             "uniqueItems": true,
@@ -127,6 +131,12 @@
         "hostNetwork": {
             "default": false,
             "type": "boolean"
+        },
+        "hostUsers": {
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "image": {
             "type": "object",
@@ -503,6 +513,10 @@
         },
         "strategy": {
             "type": "object"
+        },
+        "tmpSizeLimit": {
+            "default": "",
+            "type": "string"
         },
         "tolerations": {
             "type": "array",

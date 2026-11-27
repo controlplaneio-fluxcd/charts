@@ -1,5 +1,6 @@
 {{- include "flux-operator.validateSPIFFE" . -}}
 {{- include "flux-operator.validateWeb" . -}}
+{{- include "flux-operator.validatePod" . -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -58,6 +59,10 @@ spec:
       {{- if .Values.hostNetwork }}
       hostNetwork: true
       {{- end }}
+      {{- if not (kindIs "invalid" .Values.hostUsers) }}
+      hostUsers: {{ .Values.hostUsers }}
+      {{- end }}
+      enableServiceLinks: {{ .Values.enableServiceLinks }}
       containers:
         - name: manager
           args:
@@ -159,7 +164,11 @@ spec:
             {{- end }}
       volumes:
         - name: temp
-          emptyDir: {}
+          emptyDir:
+            {{- with .Values.tmpSizeLimit }}
+            sizeLimit: {{ . | quote }}
+            {{- else }} {}
+            {{- end }}
       {{- if include "flux-operator.createWebConfigSecret" . }}
         - name: web-config
           secret:

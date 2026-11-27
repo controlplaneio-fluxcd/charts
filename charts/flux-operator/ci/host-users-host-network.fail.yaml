@@ -1,0 +1,3 @@
+# fail: 'hostUsers: false' cannot be combined with 'hostNetwork'
+hostUsers: false
+hostNetwork: true
