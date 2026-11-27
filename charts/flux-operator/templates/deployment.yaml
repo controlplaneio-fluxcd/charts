@@ -89,7 +89,7 @@ spec:
             - --authorized-web-ui-client-spiffe-id={{ . }}
             {{- end }}
             {{- range .Values.extraArgs }}
-            - {{ . }}
+            - {{ . | quote }}
             {{- end }}
           env:
             - name: RUNTIME_NAMESPACE
@@ -97,7 +97,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: REPORTING_INTERVAL
-              value: {{ .Values.reporting.interval }}
+              value: {{ .Values.reporting.interval | quote }}
             - name: WEB_SERVER_PORT
               value: "{{ ternary .Values.ports.web 0 .Values.web.enabled }}"
             {{- with .Values.spiffe.workloadAPI.endpoint }}
@@ -106,15 +106,15 @@ spec:
             {{- end }}
             {{- with .Values.marketplace.type }}
             - name: MARKETPLACE_TYPE
-              value: {{ . }}
+              value: {{ . | quote }}
             {{- end }}
             {{- with .Values.marketplace.account }}
             - name: MARKETPLACE_ACCOUNT
-              value: {{ . }}
+              value: {{ . | quote }}
             {{- end }}
             {{- with .Values.marketplace.license }}
             - name: MARKETPLACE_LICENSE
-              value: {{ . }}
+              value: {{ . | quote }}
             {{- end }}
             {{- if .Values.extraEnvs }}
               {{- toYaml .Values.extraEnvs | nindent 12 }}

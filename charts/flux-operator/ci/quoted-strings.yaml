@@ -1,0 +1,9 @@
+# Strings that YAML reads as booleans or mappings when left unquoted.
+reporting:
+  interval: "true"
+marketplace:
+  type: "on"
+  account: "no"
+  license: "yes"
+extraArgs:
+  - "--key: value"
