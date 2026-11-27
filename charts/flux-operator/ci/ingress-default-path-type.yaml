@@ -1,0 +1,8 @@
+# Ingress path without pathType, which the chart defaults.
+web:
+  ingress:
+    enabled: true
+    hosts:
+      - host: flux-web.example.com
+        paths:
+          - path: /
