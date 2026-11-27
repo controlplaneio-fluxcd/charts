@@ -1,4 +1,7 @@
 {{- if .Values.web.ingress.enabled -}}
+{{- if not .Values.web.enabled -}}
+{{- fail "Invalid values: 'web.ingress.enabled' requires 'web.enabled'." -}}
+{{- end -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

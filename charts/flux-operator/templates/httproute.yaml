@@ -1,4 +1,7 @@
 {{- if .Values.web.httpRoute.enabled -}}
+{{- if not .Values.web.enabled -}}
+{{- fail "Invalid values: 'web.httpRoute.enabled' requires 'web.enabled'." -}}
+{{- end -}}
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
