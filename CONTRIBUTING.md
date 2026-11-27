@@ -28,7 +28,7 @@ Please test your changes on a Kubernetes cluster by installing
 the Helm chart built from your fork:
 
 ```shell
-helm upgrade --install flux-operator .charts/flux-operator \
+helm upgrade --install flux-operator ./charts/flux-operator \
   --namespace flux-system \
   --create-namespace \
   --wait

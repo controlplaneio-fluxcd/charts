@@ -20,6 +20,9 @@ annotations:
       url: https://github.com/controlplaneio-fluxcd/charts
     - name: Upstream Project
       url: https://github.com/controlplaneio-fluxcd/flux-operator
+  artifacthub.io/images: |
+    - name: flux-operator
+      image: ghcr.io/controlplaneio-fluxcd/flux-operator:v0.64.0
 maintainers:
   - name: ControlPlane Flux Team
     email: flux-enterprise@control-plane.io

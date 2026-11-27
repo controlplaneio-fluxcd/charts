@@ -1,0 +1,31 @@
+# Every optional object on.
+commonLabels:
+  team: platform
+commonAnnotations:
+  owner: platform
+web:
+  ingress:
+    enabled: true
+    className: nginx
+    hosts:
+      - host: flux-web.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      - secretName: flux-web-tls
+        hosts:
+          - flux-web.example.com
+  httpRoute:
+    enabled: true
+    parentRefs:
+      - name: my-gateway
+        namespace: gateway-system
+    hostnames:
+      - flux-web.example.com
+  rbac:
+    createAggregation: true
+apiPriority:
+  enabled: true
+serviceMonitor:
+  create: true

@@ -1,0 +1,5 @@
+# Standalone web server acting with its own privileges.
+web:
+  serverOnly: true
+  userActions:
+    access: FineGrained

@@ -1,0 +1,4 @@
+# Operator bound to the host network.
+hostNetwork: true
+strategy:
+  type: Recreate

@@ -1,0 +1,10 @@
+# Inline web config rendered into a Secret.
+web:
+  config:
+    baseURL: https://flux-web.example.com
+    authentication:
+      type: Anonymous
+      anonymous:
+        username: flux-viewer
+        groups:
+          - flux-readonly

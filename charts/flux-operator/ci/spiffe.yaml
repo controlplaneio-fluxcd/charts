@@ -1,0 +1,12 @@
+# SPIFFE Workload API through the CSI driver, Broker API and mTLS web clients.
+spiffe:
+  workloadAPI:
+    endpoint: unix:///spiffe-workload-api/spire-agent.sock
+    csiDriver: csi.spiffe.io
+  brokerAPI:
+    endpoint: unix:///spiffe-workload-api/spire-agent.sock
+    ids:
+      - spiffe://example.org/ns/flux-system/sa/flux-operator
+web:
+  authorizedClientSPIFFEIDs:
+    - spiffe://example.org/ns/gateway/sa/envoy

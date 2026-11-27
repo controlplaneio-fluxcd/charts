@@ -3,8 +3,13 @@ apiVersion: flowcontrol.apiserver.k8s.io/v1
 kind: FlowSchema
 metadata:
   name: {{ include "flux-operator.fullname" . }}
+  labels:
+    {{- include "flux-operator.labels" . | nindent 4 }}
+    {{- with .Values.commonLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   annotations:
-    apf.kubernetes.io/autoupdate-spec: "false"
+    {{- toYaml (merge (dict "apf.kubernetes.io/autoupdate-spec" "false") .Values.commonAnnotations) | nindent 4 }}
 spec:
   distinguisherMethod:
     type: ByUser

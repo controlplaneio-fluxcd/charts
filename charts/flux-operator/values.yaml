@@ -15,19 +15,19 @@ reporting:
   interval: 5m # @schema required: true
 
 web:
-  # -- Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080.
+  # -- Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on the port set in `ports.web`.
   enabled: true
   # -- The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/)
   config: { } # @schema type: object
   # -- Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`.
   configSecretName: "" # @schema default: ""
-  # -- SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on port 9080 accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`.
+  # -- SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on the port set in `ports.web` accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`.
   authorizedClientSPIFFEIDs: [ ] # @schema item: string ; uniqueItems: true
   # -- GitOps actions configuration for the web UI.
   userActions:
     # -- Access mode for GitOps actions. When set to `FineGrained`, actions are performed using the web server's own privileges instead of impersonating the user, and the web ClusterRole is extended with the native Kubernetes permissions required by the actions (only effective in `web.serverOnly` mode; otherwise the operator already runs as cluster-admin). Either `Impersonated` (default) or `FineGrained`.
     access: Impersonated # @schema enum:["Impersonated", "FineGrained"]; default: "Impersonated"
-  # -- Create a NetworkPolicy to allow access to the Flux Status web interface.
+  # -- Create a NetworkPolicy that restricts the ingress of the pod to the web and metrics ports, open to every namespace.
   networkPolicy:
     create: true
   # -- Create standard roles for [user access management](https://fluxoperator.dev/docs/web-ui/user-management/).
@@ -82,7 +82,7 @@ image:
 
 # -- Pod priority class name.
 # Recommended value is system-cluster-critical.
-priorityClassName: "" # @schema default: "system-cluster-critical"
+priorityClassName: "" # @schema default: ""; examples: ["system-cluster-critical"]
 
 # -- Kubernetes [API priority and fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/) settings.
 apiPriority: # @schema default: {"enabled":false,"level":"workload-high","extraServiceAccounts":[]}
@@ -133,7 +133,7 @@ rbac:
   createAggregation: true
 
 # -- Pod security context settings.
-podSecurityContext: { } # @schema default: {"fsGroup":1337}
+podSecurityContext: { } # @schema default: {}; examples: [{"fsGroup":1337}]
 
 # -- Container security context settings.
 # The default is compliant with the pod security restricted profile.
@@ -164,7 +164,7 @@ tolerations: [ ] # @schema item: object ; uniqueItems: true
 # -- Pod Node Selector settings.
 nodeSelector: { } # @schema type: object
 
-# -- Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock.
+# -- Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock, and for `hostNetwork` installs on a single node, where the new pod cannot bind the ports the old pod still holds.
 strategy: { } # @schema type: object
 
 ports:
@@ -175,8 +175,17 @@ ports:
   # -- Port of the Flux Status web server. Sets the `WEB_SERVER_PORT` environment variable when `web.enabled` is `true`.
   web: 9080 # @schema type: integer; minimum: 1; maximum: 65535; required: true
 
-# -- If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network.
+# -- If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network. On a single node, or a node selected by `nodeSelector`, set `strategy` to `{"type":"Recreate"}` so a rollout does not wait for host ports the old pod still holds.
 hostNetwork: false # @schema default: false
+
+# -- If `false`, the pod runs in a user namespace, so root in the container is unprivileged on the host. Needs Kubernetes 1.33+ or the `UserNamespacesSupport` feature gate and runtime support, and cannot be combined with `hostNetwork`. Unset leaves the choice to the cluster.
+hostUsers: null # @schema type: [boolean, null]; default: null
+
+# -- If `true`, the kubelet injects environment variables for every Service of the namespace into the pod. The operator reads none of them.
+enableServiceLinks: false # @schema type: boolean; default: false
+
+# -- Size limit of the `/tmp` volume, e.g. `1Gi`. Unset leaves the volume unbounded; the pod is evicted when it exceeds the limit.
+tmpSizeLimit: "" # @schema type: string; default: ""
 
 # -- Pod extra volumes.
 extraVolumes: [ ] # @schema item: object ; uniqueItems: true

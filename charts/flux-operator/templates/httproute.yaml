@@ -1,4 +1,7 @@
 {{- if .Values.web.httpRoute.enabled -}}
+{{- if not .Values.web.enabled -}}
+{{- fail "Invalid values: 'web.httpRoute.enabled' requires 'web.enabled'." -}}
+{{- end -}}
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -6,7 +9,10 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "flux-operator.labels" . | nindent 4 }}
-  {{- with .Values.web.httpRoute.annotations }}
+    {{- with .Values.commonLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with merge (deepCopy (.Values.web.httpRoute.annotations | default dict)) .Values.commonAnnotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}

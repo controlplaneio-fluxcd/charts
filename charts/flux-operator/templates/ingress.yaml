@@ -1,4 +1,7 @@
 {{- if .Values.web.ingress.enabled -}}
+{{- if not .Values.web.enabled -}}
+{{- fail "Invalid values: 'web.ingress.enabled' requires 'web.enabled'." -}}
+{{- end -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -6,7 +9,10 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "flux-operator.labels" . | nindent 4 }}
-  {{- with .Values.web.ingress.annotations }}
+    {{- with .Values.commonLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with merge (deepCopy (.Values.web.ingress.annotations | default dict)) .Values.commonAnnotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -31,9 +37,7 @@ spec:
         paths:
           {{- range .paths }}
           - path: {{ .path }}
-            {{- with .pathType }}
-            pathType: {{ . }}
-            {{- end }}
+            pathType: {{ .pathType | default "ImplementationSpecific" }}
             backend:
               service:
                 name: {{ include "flux-operator.fullname" $ }}

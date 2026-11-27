@@ -9,7 +9,7 @@ ControlPlane [enterprise distribution](https://control-plane.io/enterprise-for-f
 The operator automates the patching for hotfixes and CVEs affecting the Flux controllers container images
 and enables the configuration of multi-tenancy lockdown on Kubernetes and OpenShift clusters.
 
-The operator comes with the Flux Status Page web UI exposed on port `9080` that allows users to visualize the
+The operator comes with the Flux Status Page web UI, served on the `ports.web` port and exposed by the Service on port `9080`, that allows users to visualize the
 status of the Flux installation and monitor the GitOps delivery pipeline in real-time.
 
 ## Prerequisites
@@ -53,12 +53,14 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | apiPriority | object | `{"enabled":false,"extraServiceAccounts":[],"level":"workload-high"}` | Kubernetes [API priority and fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/) settings. |
 | commonAnnotations | object | `{}` | Common annotations to add to all deployed objects including pods. |
 | commonLabels | object | `{}` | Common labels to add to all deployed objects including pods. |
+| enableServiceLinks | bool | `false` | If `true`, the kubelet injects environment variables for every Service of the namespace into the pod. The operator reads none of them. |
 | extraArgs | list | `[]` | Container extra arguments. |
 | extraEnvs | list | `[]` | Container extra environment variables. |
 | extraVolumeMounts | list | `[]` | Container extra volume mounts. |
 | extraVolumes | list | `[]` | Pod extra volumes. |
 | fullnameOverride | string | `""` |  |
-| hostNetwork | bool | `false` | If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network. |
+| hostNetwork | bool | `false` | If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network. On a single node, or a node selected by `nodeSelector`, set `strategy` to `{"type":"Recreate"}` so a rollout does not wait for host ports the old pod still holds. |
+| hostUsers | string | `nil` | If `false`, the pod runs in a user namespace, so root in the container is unprivileged on the host. Needs Kubernetes 1.33+ or the `UserNamespacesSupport` feature gate and runtime support, and cannot be combined with `hostNetwork`. Unset leaves the choice to the cluster. |
 | image | object | `{"imagePullPolicy":"IfNotPresent","pullSecrets":[],"repository":"ghcr.io/controlplaneio-fluxcd/flux-operator","tag":""}` | Container image settings. The image tag defaults to the chart appVersion. |
 | installCRDs | bool | `true` | Install and upgrade the custom resource definitions. |
 | livenessProbe | object | `{"httpGet":{"path":"/healthz","port":"http"},"initialDelaySeconds":15,"periodSeconds":20}` | Container liveness probe settings. |
@@ -86,15 +88,16 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | spiffe.brokerAPI.ids | list | `[]` | SPIFFE IDs or prefixes of the Broker API endpoint. Sets the repeatable `--spiffe-broker-id` flag. |
 | spiffe.workloadAPI.csiDriver | string | `""` | The SPIFFE CSI driver name used to mount the Workload API socket at `/spiffe-workload-api`. When set, the endpoint must be a socket under that path, e.g. `unix:///spiffe-workload-api/spire-agent.sock`. |
 | spiffe.workloadAPI.endpoint | string | `""` | The SPIFFE Workload API endpoint. Sets the `SPIFFE_ENDPOINT_SOCKET` environment variable. |
-| strategy | object | `{}` | Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock. |
+| strategy | object | `{}` | Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock, and for `hostNetwork` installs on a single node, where the new pod cannot bind the ports the old pod still holds. |
+| tmpSizeLimit | string | `""` | Size limit of the `/tmp` volume, e.g. `1Gi`. Unset leaves the volume unbounded; the pod is evicted when it exceeds the limit. |
 | tolerations | list | `[]` | Pod tolerations settings. |
-| web.authorizedClientSPIFFEIDs | list | `[]` | SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on port 9080 accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`. |
+| web.authorizedClientSPIFFEIDs | list | `[]` | SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on the port set in `ports.web` accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`. |
 | web.config | object | `{}` | The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/) |
 | web.configSecretName | string | `""` | Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`. |
-| web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080. |
+| web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on the port set in `ports.web`. |
 | web.httpRoute | object | `{"annotations":{},"enabled":false,"hostnames":[],"parentRefs":[]}` | Gateway API HTTPRoute settings for the Flux Status web interface. |
 | web.ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress settings for the Flux Status web interface. |
-| web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy to allow access to the Flux Status web interface. |
+| web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy that restricts the ingress of the pod to the web and metrics ports, open to every namespace. |
 | web.rbac | object | `{"createAggregation":false,"createRoles":true}` | Create standard roles for [user access management](https://fluxoperator.dev/docs/web-ui/user-management/). |
 | web.serverOnly | bool | `false` | Run the Flux Status web server as a standalone deployment (requires a dedicated Helm release). |
 | web.serverReplicas | int | `1` | Number of replicas for the Flux Status web server standalone deployment (only applicable if `web.serverOnly` is `true`). |

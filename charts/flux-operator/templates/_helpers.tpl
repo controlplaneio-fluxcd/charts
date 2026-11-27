@@ -133,6 +133,25 @@ true
 {{- end }}
 
 {{/*
+Fails when web.serverOnly is set without web.enabled, which would deploy a
+second reconciling operator instead of the standalone web server.
+*/}}
+{{- define "flux-operator.validateWeb" -}}
+{{- if and .Values.web.serverOnly (not .Values.web.enabled) -}}
+{{- fail "Invalid values: 'web.serverOnly' requires 'web.enabled'." -}}
+{{- end -}}
+{{- end }}
+
+{{/*
+Fails when the pod settings cannot be combined.
+*/}}
+{{- define "flux-operator.validatePod" -}}
+{{- if and (eq (toString .Values.hostUsers) "false") .Values.hostNetwork -}}
+{{- fail "Invalid values: 'hostUsers: false' cannot be combined with 'hostNetwork'." -}}
+{{- end -}}
+{{- end }}
+
+{{/*
 Fails when the SPIFFE settings are incomplete or inconsistent.
 */}}
 {{- define "flux-operator.validateSPIFFE" -}}

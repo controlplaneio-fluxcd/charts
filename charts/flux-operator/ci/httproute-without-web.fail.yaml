@@ -1,0 +1,5 @@
+# fail: Invalid values: 'web.httpRoute.enabled' requires 'web.enabled'.
+web:
+  enabled: false
+  httpRoute:
+    enabled: true

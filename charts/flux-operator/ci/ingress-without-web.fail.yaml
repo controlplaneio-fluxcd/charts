@@ -1,0 +1,5 @@
+# fail: Invalid values: 'web.ingress.enabled' requires 'web.enabled'.
+web:
+  enabled: false
+  ingress:
+    enabled: true
