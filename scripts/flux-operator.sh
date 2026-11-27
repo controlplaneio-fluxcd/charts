@@ -80,6 +80,9 @@ export APP_VERSION=${VERSION}
 yq eval '.appVersion=env(APP_VERSION)' -i "${CHART_DIR}/Chart.yaml"
 yq eval '.appVersion=env(APP_VERSION)' -i "${INSTANCE_CHART_DIR}/Chart.yaml"
 yq eval '.appVersion=env(APP_VERSION)' -i "${MCP_CHART_DIR}/Chart.yaml"
+# Patch the operator image scanned by Artifact Hub
+export OPERATOR_IMAGE="ghcr.io/controlplaneio-fluxcd/flux-operator:${VERSION}"
+yq eval '.annotations["artifacthub.io/images"]="- name: flux-operator\n  image: "+env(OPERATOR_IMAGE)+"\n"' -i "${CHART_DIR}/Chart.yaml"
 export CHART_VERSION=${VERSION#v}
 yq eval '.version=env(CHART_VERSION)' -i "${CHART_DIR}/Chart.yaml"
 yq eval '.version=env(CHART_VERSION)' -i "${INSTANCE_CHART_DIR}/Chart.yaml"
