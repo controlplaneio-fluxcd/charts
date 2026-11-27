@@ -69,7 +69,7 @@ transformers:
 EOF
 
 # Generate CRDs
-echo "{{- if and .Values.installCRDs }}" > "${CHART_DIR}/templates/crds.yaml"
+echo "{{- if .Values.installCRDs }}" > "${CHART_DIR}/templates/crds.yaml"
 kubectl kustomize "${TEMPDIR}" >> "${CHART_DIR}/templates/crds.yaml"
 echo "{{- end }}" >> "${CHART_DIR}/templates/crds.yaml"
 

@@ -3,7 +3,7 @@
 # Prerequisites
 # - brew install flux kubectl yq helm helm-docs
 # - go install github.com/fluxcd/flux-schema/cmd/flux-schema@latest
-# - helm plugin install https://github.com/losisin/helm-values-schema-json.git --verify=false
+# - helm plugin install https://github.com/losisin/helm-values-schema-json.git --verify=false --version v2.6.1
 
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
@@ -41,7 +41,7 @@ sync-quay: ## Sync latest images and charts to https://quay.io/organization/flux
 
 .PHONY: plugins
 plugins: ## Install required Helm plugins.
-	helm plugin install https://github.com/losisin/helm-values-schema-json.git --verify=false
+	helm plugin install https://github.com/losisin/helm-values-schema-json.git --verify=false --version v2.6.1
 
 .PHONY: help
 help: ## Display this help.
