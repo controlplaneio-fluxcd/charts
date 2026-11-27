@@ -9,7 +9,7 @@ ControlPlane [enterprise distribution](https://control-plane.io/enterprise-for-f
 The operator automates the patching for hotfixes and CVEs affecting the Flux controllers container images
 and enables the configuration of multi-tenancy lockdown on Kubernetes and OpenShift clusters.
 
-The operator comes with the Flux Status Page web UI exposed on port `9080` that allows users to visualize the
+The operator comes with the Flux Status Page web UI, served on the `ports.web` port and exposed by the Service on port `9080`, that allows users to visualize the
 status of the Flux installation and monitor the GitOps delivery pipeline in real-time.
 
 ## Prerequisites
@@ -88,10 +88,10 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | spiffe.workloadAPI.endpoint | string | `""` | The SPIFFE Workload API endpoint. Sets the `SPIFFE_ENDPOINT_SOCKET` environment variable. |
 | strategy | object | `{}` | Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock. |
 | tolerations | list | `[]` | Pod tolerations settings. |
-| web.authorizedClientSPIFFEIDs | list | `[]` | SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on port 9080 accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`. |
+| web.authorizedClientSPIFFEIDs | list | `[]` | SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on the port set in `ports.web` accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`. |
 | web.config | object | `{}` | The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/) |
 | web.configSecretName | string | `""` | Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`. |
-| web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080. |
+| web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on the port set in `ports.web`. |
 | web.httpRoute | object | `{"annotations":{},"enabled":false,"hostnames":[],"parentRefs":[]}` | Gateway API HTTPRoute settings for the Flux Status web interface. |
 | web.ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress settings for the Flux Status web interface. |
 | web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy that restricts the ingress of the pod to the web and metrics ports, open to every namespace. |

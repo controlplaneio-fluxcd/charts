@@ -244,9 +244,12 @@
             "type": "object"
         },
         "podSecurityContext": {
-            "default": {
-                "fsGroup": 1337
-            },
+            "examples": [
+                {
+                    "fsGroup": 1337
+                }
+            ],
+            "default": {},
             "type": "object"
         },
         "ports": {
@@ -275,7 +278,10 @@
             }
         },
         "priorityClassName": {
-            "default": "system-cluster-critical",
+            "examples": [
+                "system-cluster-critical"
+            ],
+            "default": "",
             "type": "string"
         },
         "rbac": {

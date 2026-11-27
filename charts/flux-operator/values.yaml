@@ -15,13 +15,13 @@ reporting:
   interval: 5m # @schema required: true
 
 web:
-  # -- Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080.
+  # -- Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on the port set in `ports.web`.
   enabled: true
   # -- The spec of the [Web Config API](https://fluxoperator.dev/docs/web-ui/web-config-api/)
   config: { } # @schema type: object
   # -- Reference to an existing Secret in the same namespace as the deployment containing the Web Config API. Should have the key `config.yaml`.
   configSecretName: "" # @schema default: ""
-  # -- SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on port 9080 accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`.
+  # -- SPIFFE IDs or prefixes of authorized web UI clients. When set, the web server on the port set in `ports.web` accepts only SPIFFE mTLS connections from these clients, so the Ingress or Gateway in front of it must present an SVID (e.g. Envoy Gateway with a BackendTLSPolicy). Requires `spiffe.workloadAPI.endpoint`.
   authorizedClientSPIFFEIDs: [ ] # @schema item: string ; uniqueItems: true
   # -- GitOps actions configuration for the web UI.
   userActions:
@@ -82,7 +82,7 @@ image:
 
 # -- Pod priority class name.
 # Recommended value is system-cluster-critical.
-priorityClassName: "" # @schema default: "system-cluster-critical"
+priorityClassName: "" # @schema default: ""; examples: ["system-cluster-critical"]
 
 # -- Kubernetes [API priority and fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/) settings.
 apiPriority: # @schema default: {"enabled":false,"level":"workload-high","extraServiceAccounts":[]}
@@ -133,7 +133,7 @@ rbac:
   createAggregation: true
 
 # -- Pod security context settings.
-podSecurityContext: { } # @schema default: {"fsGroup":1337}
+podSecurityContext: { } # @schema default: {}; examples: [{"fsGroup":1337}]
 
 # -- Container security context settings.
 # The default is compliant with the pod security restricted profile.
