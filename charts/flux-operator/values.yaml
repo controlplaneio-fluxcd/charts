@@ -164,7 +164,7 @@ tolerations: [ ] # @schema item: object ; uniqueItems: true
 # -- Pod Node Selector settings.
 nodeSelector: { } # @schema type: object
 
-# -- Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock.
+# -- Deployment update strategy. Set `{"type":"Recreate"}` for single-replica installs whose web UI is fronted by a load balancer health check, where a rolling update would otherwise deadlock, and for `hostNetwork` installs on a single node, where the new pod cannot bind the ports the old pod still holds.
 strategy: { } # @schema type: object
 
 ports:
@@ -175,7 +175,7 @@ ports:
   # -- Port of the Flux Status web server. Sets the `WEB_SERVER_PORT` environment variable when `web.enabled` is `true`.
   web: 9080 # @schema type: integer; minimum: 1; maximum: 65535; required: true
 
-# -- If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network.
+# -- If `true`, the container ports (`ports.metrics`, `ports.health` and `ports.web`) are exposed on the host network. On a single node, or a node selected by `nodeSelector`, set `strategy` to `{"type":"Recreate"}` so a rollout does not wait for host ports the old pod still holds.
 hostNetwork: false # @schema default: false
 
 # -- Pod extra volumes.
