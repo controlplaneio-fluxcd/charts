@@ -94,7 +94,7 @@ see the Flux Operator [documentation](https://fluxoperator.dev/docs/).
 | web.enabled | bool | `true` | Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080. |
 | web.httpRoute | object | `{"annotations":{},"enabled":false,"hostnames":[],"parentRefs":[]}` | Gateway API HTTPRoute settings for the Flux Status web interface. |
 | web.ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress settings for the Flux Status web interface. |
-| web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy to allow access to the Flux Status web interface. |
+| web.networkPolicy | object | `{"create":true}` | Create a NetworkPolicy that restricts the ingress of the pod to the web and metrics ports, open to every namespace. |
 | web.rbac | object | `{"createAggregation":false,"createRoles":true}` | Create standard roles for [user access management](https://fluxoperator.dev/docs/web-ui/user-management/). |
 | web.serverOnly | bool | `false` | Run the Flux Status web server as a standalone deployment (requires a dedicated Helm release). |
 | web.serverReplicas | int | `1` | Number of replicas for the Flux Status web server standalone deployment (only applicable if `web.serverOnly` is `true`). |
